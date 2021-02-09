@@ -1,0 +1,70 @@
+# indexeddb_from_rust/Makefile.toml
+# https://github.com/sagiegurari/cargo-make/blob/master/src/lib/Makefile.stable.toml
+
+[config]
+skip_core_tasks = true
+
+[tasks.default]
+description = "help for prepared make tasks"
+clear = true															   
+script= [
+"clear",
+"echo ",
+"echo COMMANDS FOR TASK AUTOMATION:",
+"echo    $ clear - clear the screen",
+"echo    $ cargo make - list of common commands for task automation",
+"echo    $ cargo make tsc - run typescript compiler with tsconfig.json", 
+"echo    $ cargo make release - increment version in Cargo.toml and service_worker.js, build release version and copy pkg to web content folder",
+"echo Run the web server in a separate terminal: 'cd ~/rustprojects/indexeddb_from_rust/web_server_folder/;basic-http-server'",
+"echo Run the web app in your browser: 'http://127.0.0.1:4000/indexeddb_from_rust/'",
+"echo    $ cargo make publish_to_web - automation for publish",
+"echo "
+]
+
+[tasks.release]
+description = "cargo build release"
+clear = true
+script = [
+    "clear",
+    "echo $ lmake_version_from_date",
+    "lmake_version_from_date",
+    "echo $ lmake_lines_of_code",
+    "lmake_lines_of_code",
+    "echo $ lmake_cargo_toml_to_md",
+    "lmake_cargo_toml_to_md",
+    "echo $ cargo fmt",
+    "cargo fmt",
+    "echo $ tsc",
+    "tsc",
+    "echo $ wasm-pack build --target web --release",
+    "wasm-pack build --target web --release",
+    "echo $ \\rsync -a --delete-after pkg/ web_server_folder/indexeddb_from_rust/pkg/",
+    "\\rsync -a --delete-after pkg/ web_server_folder/indexeddb_from_rust/pkg/",
+    "echo Finished: Run the web server in a separate terminal: 'cd ~/rustprojects/indexeddb_from_rust/web_server_folder/;basic-http-server'",
+    "echo Finished: Run the web app in your browser: 'http://127.0.0.1:4000/indexeddb_from_rust/'",
+]		
+
+[tasks.tsc]
+description = "tsc with tsconfig.json"
+clear = true
+script = [
+    "clear",
+    "echo $ tsc",
+    "tsc",
+]
+
+[tasks.publish_to_web]
+description = "publish to web server"
+workspace = false
+clear = true
+# backslash is the escape character for all other special characters.
+# and then another time I have to escape the backslash. So 4 backslash for one backslash.
+script = [
+    "echo ",
+    "echo $ git tag -f -a v${CARGO_MAKE_CRATE_VERSION} -m version_${CARGO_MAKE_CRATE_VERSION}",
+    "git tag -f -a v${CARGO_MAKE_CRATE_VERSION} -m version_${CARGO_MAKE_CRATE_VERSION}",
+    "echo $ rsync -a --info=progress2 --delete-after ~/rustprojects/indexeddb_from_rust/web_server_folder/indexeddb_from_rust/ ~/rustprojects/googlecloud/var/www/bestia.dev/indexeddb_from_rust/",
+    "rsync -a --info=progress2 --delete-after ~/rustprojects/indexeddb_from_rust/web_server_folder/indexeddb_from_rust/ ~/rustprojects/googlecloud/var/www/bestia.dev/indexeddb_from_rust/",
+    "echo $ rsync -e ssh -a --info=progress2 --delete-after ~/rustprojects/googlecloud/var/www/bestia.dev/indexeddb_from_rust/ luciano_bestia@bestia.dev:/var/www/bestia.dev/indexeddb_from_rust/",
+    "rsync -e ssh -a --info=progress2 --delete-after ~/rustprojects/googlecloud/var/www/bestia.dev/indexeddb_from_rust/ luciano_bestia@bestia.dev:/var/www/bestia.dev/indexeddb_from_rust/",
+]
