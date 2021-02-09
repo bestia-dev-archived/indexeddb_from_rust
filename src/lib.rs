@@ -1,15 +1,14 @@
-use unwrap::unwrap;
-use wasm_bindgen::prelude::*;
-use web_sys::console;
+// indexeddb_from_rust lib.rs
 
-#[wasm_bindgen(raw_module = "/indexeddb_from_rust/js/indexeddb_lib.js")]
-extern "C" {
-    fn check_browser_capability();
-    #[wasm_bindgen(catch)]
-    fn open_db() -> Result<(), JsValue>;
-    #[wasm_bindgen(catch)]
-    fn add_key_value(store: String, key: String, value: String) -> Result<(), JsValue>;
-}
+//use unwrap::unwrap;
+use wasm_bindgen::prelude::*;
+use wasm_bindgen::JsValue;
+
+mod idb_mod;
+mod web_sys_mod;
+
+use idb_mod::*;
+use web_sys_mod::*;
 
 #[wasm_bindgen(start)]
 /// To start the Wasm application, wasm_bindgen runs this functions
@@ -21,36 +20,36 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
         "indexeddb_from_rust v{}",
         env!("CARGO_PKG_VERSION")
     ));
-    //unsafe {
     check_browser_capability();
-    //}
     //async block
     wasm_bindgen_futures::spawn_local(async {
-        //unsafe {
-        open_db().unwrap();
-        //wait for initialization
+        let db1 = init_and_open_db().await;
 
-        //add("currency".to_owned(), "EUR".to_owned(), "euro".to_owned()).unwrap();
-        //add("currency".to_owned(), "USD".to_owned(), "dollar".to_owned()).unwrap();
-        //}
+        put_key_value(
+            &db1,
+            "currency".to_owned(),
+            "EUR".to_owned(),
+            "euro".to_owned(),
+        )
+        .unwrap();
+        put_key_value(
+            &db1,
+            "currency".to_owned(),
+            "USD".to_owned(),
+            "dollar".to_owned(),
+        )
+        .unwrap();
+        put_key_value(
+            &db1,
+            "currency".to_owned(),
+            "HRK".to_owned(),
+            "kuna".to_owned(),
+        )
+        .unwrap();
+
+        let text = get_key_value(&db1, "currency".to_owned(), "HRK".to_owned()).await;
+        debug_write(&format!("{:?}", text));
     });
     // return
     Ok(())
-}
-
-/// return window object
-pub fn window() -> web_sys::Window {
-    unwrap!(web_sys::window())
-}
-
-/// get element by id
-pub fn get_element_by_id(element_id: &str) -> web_sys::Element {
-    let document = unwrap!(window().document());
-    unwrap!(document.get_element_by_id(element_id))
-}
-
-/// debug write into session_storage
-pub fn debug_write(text: &str) {
-    // writing to the console
-    console::log_1(&JsValue::from_str(text));
 }

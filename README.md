@@ -5,25 +5,20 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.209.1405  date: 2021-02-09 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.209.1625  date: 2021-02-09 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-40-green.svg)]()
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-4-blue.svg)]()
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-12-purple.svg)]()
-[![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)]()
-[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)]()
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-95-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-7-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-18-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
 [comment]: # (lmake_lines_of_code end)
 
 [![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/blob/master/LICENSE) [![Rust](https://github.com/LucianoBestia/indexeddb_from_rust/workflows/RustAction/badge.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-
-## Try it
-
-<https://bestia.dev/indexeddb_from_rust/>  
-![screenshot](https://github.com/LucianoBestia/indexeddb_from_rust/raw/main/images/minimal_clock.jpg)  
 
 ## experimenting
 
@@ -67,7 +62,8 @@ tsc --version
 tsc --help
 ```
 
-In the terminal I just use `tsc` to transpile my source code.  I added this to `cargo make` for easy developing.
+In the terminal I just use `tsc` to transpile my source code with settings from `tsconfig.json`.  
+I added this to my `cargo make` for easy developing.
 I made 2 folders `src` and `js` for typescript and javascript.  
 
 ## imports
@@ -93,7 +89,7 @@ Rust code imports javascript module and functions with:
 extern "C" {
     fn check_browser_capability();
     #[wasm_bindgen(catch)]
-    fn open_db() -> Result<(), JsValue>;
+    fn js_open_db() -> Result<(), JsValue>;
     #[wasm_bindgen(catch)]
     fn add_key_value(store: String, key: String, value: String) -> Result<(), JsValue>;
 }

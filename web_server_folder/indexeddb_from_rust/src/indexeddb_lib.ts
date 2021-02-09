@@ -9,24 +9,34 @@ export function check_browser_capability(){
     }
 }
 
-/// open db with upgrade code
-export async function open_db() {
-    console.log("open_db");
-    // Failed to resolve module specifier `idb`
-    await idb.openDB('db1', 1, {
-    upgrade(db) {
-        console.log("upgrade(db)");
-      db.createObjectStore('currency');
-    },
-  });
+/// open db with upgrade code, returns a promise
+export async function js_open_db() {
+    console.log("js_open_db");
+    let db1 = await idb.openDB('db1', 1, {
+        upgrade(db) {
+            console.log("upgrade(db)");
+            db.createObjectStore('currency');
+        },
+    });
+    return db1;
 }
-
-/// short way for openDB
-const db1 = idb.openDB("db1", 1);
 
 /// add key-value in a store
-export async function add_key_value(store:string, key:string, value:string){
+export async function add_key_value(db1:idb.IDBPDatabase, store:string, key:string, value:string){
     console.log("add");
-    (await db1).add(store, value,key )
+    db1.add(store, value, key);
 }
 
+/// put key-value in a store (upsert)
+export async function put_key_value(db1:idb.IDBPDatabase, store:string, key:string, value:string){
+    console.log("put");
+    db1.put(store, value, key);
+}
+
+/// get key-value in a store 
+export async function get_key_value(db1:idb.IDBPDatabase, store:string, key:string){
+    console.log("get");
+    db1.get(store, key);
+    const value = await db1.get(store, key);
+    return value;
+}
