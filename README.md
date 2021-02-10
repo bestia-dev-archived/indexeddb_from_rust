@@ -5,14 +5,14 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.209.1625  date: 2021-02-09 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.210.1949  date: 2021-02-10 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-95-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-7-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-18-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-239-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-24-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-32-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
@@ -89,7 +89,7 @@ Rust code imports javascript module and functions with:
 extern "C" {
     fn check_browser_capability();
     #[wasm_bindgen(catch)]
-    fn js_open_db() -> Result<(), JsValue>;
+    fn open_db() -> Result<(), JsValue>;
     #[wasm_bindgen(catch)]
     fn add_key_value(store: String, key: String, value: String) -> Result<(), JsValue>;
 }
@@ -109,3 +109,43 @@ For those looking to disable the missing-unsafe rule until it's fixed and are us
     "missing-unsafe"
 ]
 ```
+
+## extern "C" - importing javascript functions
+
+Javascript functions are imported using the `extern "C"` block.  
+For now `rustfmt` has a bug that removes the word async, because here we have javascript functions and not C functions.  
+The workaround is to add `rustfmt::skip`:  
+
+```rust
+#[rustfmt::skip]
+#[wasm_bindgen]
+extern "C" {
+    pub(crate) async fn ...
+}
+```
+
+For a javascript function with no return value is simple:  
+`pub(crate) fn check_browser_capability();`  
+A javascript async function can return one JSValue.  
+`pub(crate) async fn get_key_value(key: String, ) -> JsValue;`  
+If we want to catch errors in the Promise, add attribute `wasm_bindgen(catch)`, then the functions returns `Result<JsValue, JsValue>`:  
+
+```rust
+#[wasm_bindgen(catch)]
+pub(crate) async fn open_db() -> Result<JsValue, JsValue>;
+```
+
+The imported async fn needs to be await just like rust functions. The macro wasm_bindgen makes some magic to transform Promises to futures on import:  
+`let db1 = open_db().await.unwrap();`  
+
+## currency exchange rates
+
+I will get the daily exchange rate in json format from:  
+<http://www.floatrates.com/daily/eur.json>  
+and fill it into indexeddb.  
+
+## pages
+
+This PWA will have more pages. Pages are complete static html files inside tha pages folder. They use the same css as index.html.  
+It is easy to edit and preview pages because they are complete.  
+The rust code will fetch the html, extract only the body content and set_inner_html to div_for_wasm_html_injecting.  

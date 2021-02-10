@@ -1,6 +1,6 @@
 [package]
 name = "indexeddb_from_rust"
-version = "2021.209.1625"
+version = "2021.210.1949"
 authors = ["Luciano Bestia <Luciano.Bestia@gmail.com>"]
 edition = "2018"
 description = "experimenting with indexeddb in rust wasm PWA"
@@ -21,6 +21,7 @@ wasm-bindgen = { version = "0.2.69", features = ["serde-serialize"] }
 console_error_panic_hook = "0.1.6"
 js-sys = "0.3.46"
 wasm-bindgen-futures = "0.4.20"
+serde_json = "1.0"
 
 [dependencies.web-sys]
 version = "0.3.46"
@@ -42,6 +43,8 @@ features = [
   "MouseEvent",
   "Navigator",
   "Node",
+  "Request",
+  "RequestInit",
   "Response",
   "Screen",
   "Window",

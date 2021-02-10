@@ -10,9 +10,9 @@ export function check_browser_capability(){
 }
 
 /// open db with upgrade code, returns a promise
-export async function js_open_db() {
-    console.log("js_open_db");
-    let db1 = await idb.openDB('db1', 1, {
+export async function open_db(db_name:string) {
+    console.log("open_db");
+    let db1 = await idb.openDB(db_name, 1, {
         upgrade(db) {
             console.log("upgrade(db)");
             db.createObjectStore('currency');
@@ -36,7 +36,14 @@ export async function put_key_value(db1:idb.IDBPDatabase, store:string, key:stri
 /// get key-value in a store 
 export async function get_key_value(db1:idb.IDBPDatabase, store:string, key:string){
     console.log("get");
-    db1.get(store, key);
     const value = await db1.get(store, key);
     return value;
 }
+
+/// open transaction returns a Promise
+export function transaction(db1:idb.IDBPDatabase, store:string){
+    console.log("transaction");
+    const tx = db1.transaction(store, 'readwrite');
+    return tx;
+}
+

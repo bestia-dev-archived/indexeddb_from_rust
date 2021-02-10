@@ -1,27 +1,165 @@
+/* css variables */  
+:root {
+    /* color palette */
+    /* use of variables: var(--color_tooltip_1); */
+    /* background color */
+    --b_color_body: #1f351b;
+    --b_color_title: #8BC24A;
+    --b_color_input_output: #FAFAFA;
+    --b_color_toolbar: #F1F7E9;
+    --b_color_cell:#F1F7E9;
+    --b_color_cell_commands:#DDEDC8;
+    --b_color_cell_disabled:whitesmoke;
+    /* front color */
+    --f_color_body: #4D4D4D;
+    --f_color_title: #FEFFFB;
+    --f_color_cell_disabled:whitesmoke;
+    /* border color*/
+    --brd_color_grid: #82AE4D;
+}
+
+/* disable double-tap for zooming*/
+* {
+    touch-action: manipulation;
+}
+
 html { 
     font-family: sans-serif;
-    background-color: #000000;
-    color: #FBF462;
+    font-size: 15px;
+    background-color: var(--b_color_body);
+    color: var(--f_color_body);
+    height: 100vh;
+    width: 100vw;
+    /*margin auto means centered horizontally*/
+    margin: 0;
+    padding: 0;
+    user-select: none;
 }
 
-/* Note: The window is dynamically resized in rust code.*/
-
-h1{
-    font-size: 100px;
-    margin-top:-20px;
-    margin-bottom:-20px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
-p{
+
+a{
+    cursor: pointer;
+}
+
+#div_for_content{
+    height: 100vh;
+}
+
+#div_main_grid{
+    /* using simple css-grid for the layout of the grid */
+    display: grid;
+    width:100vw;
+    grid-template-columns: 100vw; 
+    grid-template-rows: 9vh 15vh 13vh 15vh 48vh;
+}
+
+#div_title{
+    font-size: 20px;
+    background-color:var(--b_color_title);
+    color:var(--f_color_title);
+    line-height: 9vh;
+    padding-left: 3vw;
+}
+
+#span_reload{
+    cursor: pointer;
+    float:right;
+    padding-right: 5vw;
+}
+
+#span_hamburger_button{
+    cursor: pointer;
+    float:right;
+    padding-right: 5vw;
+}
+
+#div_input{
     font-size: 30px;
-    margin-top:5px;
-    margin-bottom:5px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+    line-height: 15vh;
+    padding-left: 3vw;
+    background-color: var(--b_color_input_output);
 }
-.small{
-    font-size: 10px;
+
+#div_toolbar{
+    cursor: pointer;
+    font-size: 20px;
+    background-color:var(--b_color_toolbar);
+    line-height: 12vh;
+    padding-left: 3vw;
+}
+
+#div_output{
+    font-size: 30px;
+    line-height: 15vh;
+    padding-left: 3vw;
+    background-color: var(--b_color_input_output);
+}
+
+#div_numeric_pad_grid{
+    /* using simple css-grid for the layout of the grid */
+    display: grid;
+    width:100vw;
+    grid-template-columns: 20vw 20vw 20vw 20vw 20vw; 
+    grid-template-rows: 12vh 12vh 12vh 12vh;
+}
+
+.div_cell {
+    cursor: pointer;
+    text-align: center;
+    line-height: 12vh;
+    background-color:var(--b_color_cell);
+    border-top: 1px;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 1px;
+    border-style: solid;
+    border-color: var(--brd_color_grid);
+    font-size: 36px;
+}
+
+.cell_commands{
+    background-color:var(--b_color_cell_commands);
+}
+
+.cell_disabled {
+    cursor: auto;
+    pointer-events: none; /* this is not the true property to make element disabled*/
+    background-color:var(--b_color_cell_disabled);
+    color: var(--f_color_cell_disabled);
+}
+
+.w3-modal{
+    z-index:3;
+    display:none;
+    padding-top:10vh;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100vw;
+    height:100vh;
+    overflow:auto;
+    /*opacity 70%*/
+    background-color:rgba(0,0,0,0.7)
+}
+
+.w3-modal-content{
+    margin:auto;
+    background-color:#fff;
+    position:relative;
+    padding:5vw;
+    outline:0;
+}
+
+.span_button{
+    cursor: pointer;
+    border: 1pt;
+    border-style: solid;
+    background-color:var(--b_color_toolbar);
+    padding: 2px;
 }
