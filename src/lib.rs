@@ -6,12 +6,12 @@ use wasm_bindgen::JsValue;
 
 mod config_mod;
 mod idb_mod;
+mod idbjs_mod;
 mod main_page_mod;
 mod qvs20_currency_mod;
 mod web_sys_mod;
 
 use crate::idb_mod as idb;
-use idb_mod::*;
 use web_sys_mod as w;
 
 #[wasm_bindgen(start)]
@@ -24,7 +24,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
         "indexeddb_from_rust v{}",
         env!("CARGO_PKG_VERSION")
     ));
-    check_browser_capability();
+    idb::check_browser_capability();
 
     //async block
     wasm_bindgen_futures::spawn_local(async {

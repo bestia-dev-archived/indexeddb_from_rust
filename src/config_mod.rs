@@ -13,7 +13,7 @@ pub async fn set_base_currency(iso_code: &str) {
 pub async fn get_base_currency() -> String {
     let value = idb::get_key_value("currency_rates", "config", "base_currency").await;
     // return
-    value.as_string().unwrap()
+    value
 }
 
 pub async fn set_quote_currency(iso_code: &str) {
@@ -25,7 +25,7 @@ pub async fn set_quote_currency(iso_code: &str) {
 pub async fn get_quote_currency() -> String {
     let value = idb::get_key_value("currency_rates", "config", "quote_currency").await;
     // return
-    value.as_string().unwrap()
+    value
 }
 
 pub async fn set_rate(rate: &str) {
@@ -37,7 +37,7 @@ pub async fn set_rate(rate: &str) {
 pub async fn get_rate() -> String {
     let value = idb::get_key_value("currency_rates", "config", "rate").await;
     // return
-    value.as_string().unwrap()
+    value
 }
 
 pub async fn set_date_fetch(date_fetch: &str) {
@@ -49,5 +49,5 @@ pub async fn set_date_fetch(date_fetch: &str) {
 pub async fn get_date_fetch() -> String {
     let value = idb::get_key_value("currency_rates", "config", "date_fetch").await;
     // return
-    value.as_string().unwrap()
+    value
 }
