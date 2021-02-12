@@ -5,13 +5,17 @@
       "sourceMap": true,
       "esModuleInterop":true,
       "baseUrl": "./web_server_folder/indexeddb_from_rust",
-      "rootDir": "./web_server_folder/indexeddb_from_rust/src",
+      "rootDir": "./src",
       "strict": true,
       "outDir": "./web_server_folder/indexeddb_from_rust/js",
       "paths": {
           "/indexeddb_from_rust/idb/index.js": [
             "./idb/index.d.ts",
             "./idb/index.js"
+          ],
+          "/indexeddb_from_rust/pkg/indexeddb_from_rust.js": [
+            "./pkg/indexeddb_from_rust.d.ts",
+            "./pkg/indexeddb_from_rust.js"
           ]
       }
     }

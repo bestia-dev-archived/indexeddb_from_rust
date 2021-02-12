@@ -246,7 +246,7 @@
         "code": "KMF",
         "alphaCode": "KMF",
         "numericCode": "174",
-        "name": "\tComoro franc",
+        "name": "Comoro franc",
         "rate": 494.91867066674,
         "date": "Wed, 10 Feb 2021 12:00:01 GMT",
         "inverseRate": 0.0020205339973391
@@ -813,7 +813,7 @@
         "code": "NIO",
         "alphaCode": "NIO",
         "numericCode": "558",
-        "name": "Nicaraguan C\u00f3rdoba",
+        "name": "Nicaraguan Córdoba",
         "rate": 42.307998615529,
         "date": "Wed, 10 Feb 2021 12:00:01 GMT",
         "inverseRate": 0.023636192510249
@@ -840,7 +840,7 @@
         "code": "TOP",
         "alphaCode": "TOP",
         "numericCode": "776",
-        "name": "Tongan pa\u02bbanga",
+        "name": "Tongan paʻanga",
         "rate": 2.7588629316502,
         "date": "Wed, 10 Feb 2021 12:00:01 GMT",
         "inverseRate": 0.36246817068285
@@ -1038,7 +1038,7 @@
         "code": "STN",
         "alphaCode": "STN",
         "numericCode": "930",
-        "name": "S\u00e3o Tom\u00e9 and Pr\u00edncipe Dobra",
+        "name": "São Tomé and Príncipe Dobra",
         "rate": 26.208390693587,
         "date": "Wed, 10 Feb 2021 12:00:01 GMT",
         "inverseRate": 0.038155719353066
@@ -1110,7 +1110,7 @@
         "code": "PYG",
         "alphaCode": "PYG",
         "numericCode": "600",
-        "name": "Paraguayan Guaran\u00ed",
+        "name": "Paraguayan Guaraní",
         "rate": 8238.3808462113,
         "date": "Wed, 10 Feb 2021 12:00:01 GMT",
         "inverseRate": 0.00012138307498371
@@ -1200,7 +1200,7 @@
         "code": "CRC",
         "alphaCode": "CRC",
         "numericCode": "188",
-        "name": "Costa Rican Col\u00f3n",
+        "name": "Costa Rican Colón",
         "rate": 741.9469210342,
         "date": "Wed, 10 Feb 2021 12:00:01 GMT",
         "inverseRate": 0.0013478053101239

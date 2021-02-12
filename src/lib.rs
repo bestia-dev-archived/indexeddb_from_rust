@@ -4,10 +4,13 @@
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 
+mod config_mod;
 mod idb_mod;
 mod main_page_mod;
+mod qvs20_currency_mod;
 mod web_sys_mod;
 
+use crate::idb_mod as idb;
 use idb_mod::*;
 use web_sys_mod as w;
 
@@ -25,38 +28,8 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
 
     //async block
     wasm_bindgen_futures::spawn_local(async {
+        idb::init_upgrade_db_currency_rates().await;
         main_page_mod::main_page().await;
-        /*
-        let db1 = open_db().await.unwrap();
-
-        put_key_value(
-            &db1,
-            "currency".to_owned(),
-            "EUR".to_owned(),
-            "euro".to_owned(),
-        )
-        .await
-        .unwrap();
-        put_key_value(
-            &db1,
-            "currency".to_owned(),
-            "USD".to_owned(),
-            "dollar".to_owned(),
-        )
-        .await
-        .unwrap();
-        put_key_value(
-            &db1,
-            "currency".to_owned(),
-            "HRK".to_owned(),
-            "kuna".to_owned(),
-        )
-        .await
-        .unwrap();
-
-        let text = get_key_value(&db1, "currency".to_owned(), "HRK".to_owned()).await;
-        w::debug_write(&format!("{:?}", text));
-          */
     });
 
     // return

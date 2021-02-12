@@ -80,10 +80,26 @@ a{
 }
 
 #div_input{
+    display: grid;
+    width:100vw;
+    grid-template-columns: 75vw 25vw; 
+    grid-template-rows: 15vh;
     font-size: 30px;
     line-height: 15vh;
     padding-left: 3vw;
     background-color: var(--b_color_input_output);
+}
+
+#div_input_unit{
+    cursor: pointer;
+    float:right;
+    padding-right: 5vw;
+}
+
+#span_quote_currency{
+    cursor: pointer;
+    float:right;
+    padding-right: 5vw;
 }
 
 #div_toolbar{
@@ -107,6 +123,10 @@ a{
     width:100vw;
     grid-template-columns: 20vw 20vw 20vw 20vw 20vw; 
     grid-template-rows: 12vh 12vh 12vh 12vh;
+    border-top: 0px;
+    border-bottom: 1px;
+    border-left: 1px;
+    border-right: 0px;
 }
 
 .div_cell {
