@@ -1,63 +1,15 @@
 // idb_mod.rs
 
-use crate::web_sys_mod as w;
+// Objects and method to work with indexeddb.
+// Fully rust code and types. All the JsValue are wrapped.
+// It uses the idb javascript library, idb_exports.ts and idb_imports_mod.rs
+
+use crate::idb_imports_mod as idbjs;
 use unwrap::unwrap;
-use wasm_bindgen::prelude::*;
-// use wasm_bindgen::JsCast;
 use wasm_bindgen::JsValue;
-// use crate::web_sys_mod::*;
-
-use crate::idbjs_mod as idbjs;
-
-// Imported functions from javascript recognize only JsValue and &str
-// I want to isolate this functions into idbjs_mod and they are used only by the idb_mod
 
 pub fn check_browser_capability() {
     idbjs::check_browser_capability();
-}
-
-/// init_upgrade_db_currency_rates will create the database and call upgrade_db()
-pub async fn init_upgrade_db_currency_rates() {
-    idbjs::init_upgrade_db("currency_rates", 2).await.unwrap();
-}
-
-/// upgrade_db is called from javascript init_upgrade_db()
-#[wasm_bindgen]
-#[allow(dead_code)]
-pub fn upgrade_db(db: JsValue, old_version: JsValue, new_version: JsValue, transaction: JsValue) {
-    let db = Database::from(db);
-    let tx = Transaction::from(transaction);
-    let old_version = unwrap!(old_version.as_f64()) as i32;
-    let new_version = unwrap!(new_version.as_f64()) as i32;
-    w::debug_write(&format!(
-        "upgrade_db from v{} to v{}",
-        old_version, new_version
-    ));
-
-    if old_version <= 0 {
-        upgrade_from_v00_to_v01(&db);
-    }
-    if old_version <= 1 {
-        upgrade_from_v01_to_v02(&db, &tx);
-    }
-}
-
-fn upgrade_from_v00_to_v01(db: &Database) {
-    w::debug_write("upgrade_from_v00_to_v01");
-    db.create_object_store("currency");
-}
-
-fn upgrade_from_v01_to_v02(db: &Database, tx: &Transaction) {
-    w::debug_write("upgrade_from_v01_to_v02");
-    db.create_object_store("config");
-    w::debug_write("after create_object_store");
-    let cfg = tx.get_object_store("config");
-
-    w::debug_write("after get_object_store_from_transaction");
-    cfg.put("base_currency", "EUR");
-    cfg.put("quote_currency", "USD");
-    cfg.put("rate", "1.21");
-    cfg.put("date_fetch", "none");
 }
 
 pub async fn put_key_value(
@@ -75,12 +27,27 @@ pub async fn get_key_value(db_name: &str, store: &str, key: &str) -> String {
     unwrap!(idbjs::get_key_value(db_name, store, key).await.as_string())
 }
 
-struct Database {
+// region: Database
+pub struct Database {
     db: JsValue,
 }
 impl Database {
-    fn create_object_store(&self, store_name: &str) {
+    /// init and upgrade
+    pub async fn init_upgrade_db(db_name: &str, version: u32, upgrade_callback_fn_name: &str) {
+        idbjs::init_upgrade_db(db_name, version, upgrade_callback_fn_name)
+            .await
+            .unwrap();
+    }
+    pub async fn use_db(db_name: &str) -> Self {
+        let db = idbjs::use_db(db_name).await;
+        // return
+        Database { db }
+    }
+    pub fn create_object_store(&self, store_name: &str) {
         idbjs::create_object_store(self.db.clone(), store_name);
+    }
+    pub async fn put_key_value(&self, store: &str, key: &str, value: &str) -> Result<(), JsValue> {
+        idbjs::db_put_key_value(&self.db, store, key, value).await
     }
 }
 /// Database from JsValue
@@ -91,11 +58,14 @@ impl From<JsValue> for Database {
         Database { db }
     }
 }
-struct Transaction {
+// endregion: Database
+
+// region: Transaction
+pub struct Transaction {
     tx: JsValue,
 }
 impl Transaction {
-    fn get_object_store(&self, store_name: &str) -> ObjectStoreInsideTransaction {
+    pub fn get_object_store(&self, store_name: &str) -> ObjectStoreInsideTransaction {
         let tx_ob_st = idbjs::get_object_store_from_transaction(&self.tx, store_name);
         let tx_ob_st = ObjectStoreInsideTransaction::from(tx_ob_st);
         // return
@@ -117,8 +87,10 @@ impl From<Transaction> for JsValue {
         tx.tx
     }
 }
+// endregion: Transaction
 
-struct ObjectStoreInsideTransaction {
+// region: ObjectStoreInsideTransaction
+pub struct ObjectStoreInsideTransaction {
     tx_ob_st: JsValue,
 }
 impl ObjectStoreInsideTransaction {
@@ -141,3 +113,4 @@ impl From<ObjectStoreInsideTransaction> for JsValue {
         tx.tx_ob_st.clone()
     }
 }
+// endregion: ObjectStoreInsideTransaction

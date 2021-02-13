@@ -5,14 +5,14 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.212.2035  date: 2021-02-12 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.213.1451  date: 2021-02-13 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-423-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-42-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-72-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-443-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-43-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-82-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-15-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
@@ -85,7 +85,7 @@ This is the wasm code compiled from `lib.rs`
 Rust code imports javascript module and functions with:  
 
 ```rust
-#[wasm_bindgen(raw_module = "/indexeddb_from_rust/js/indexeddb_lib.js")]
+#[wasm_bindgen(raw_module = "/indexeddb_from_rust/js/idb_exports.js")]
 extern "C" {
     fn check_browser_capability();
     #[wasm_bindgen(catch)]
@@ -95,7 +95,7 @@ extern "C" {
 }
 ```
 
-The `indexeddb_lib.js` is the result of typescript transpilation of `indexeddb_lib.ts`, my main typescript module.
+The `idb_exports.js` is the result of typescript transpilation of `idb_exports.ts`, my main typescript module.
 Inside that module I need to import the `idb` module with:  
 `import * as idb from '/indexeddb_from_rust/idb/index.js';`  
 
@@ -136,7 +136,8 @@ pub(crate) async fn init_db() -> Result<JsValue, JsValue>;
 ```
 
 The imported async fn needs to be await just like rust functions. The macro wasm_bindgen makes some magic to transform Promises to futures on import:  
-`let currency_rates = open_db().await.unwrap();`  
+`let currdb = open_db().await.unwrap();`  
+Some of the functions are async and others are not. It can lead to strange problems if an async function is used as normal. This is a thing to be careful about.
 
 ## currency exchange rates
 

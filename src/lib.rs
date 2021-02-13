@@ -5,14 +5,14 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 
 mod config_mod;
+mod idb_currdb_mod;
+mod idb_imports_mod;
 mod idb_mod;
-mod idbjs_mod;
 mod main_page_mod;
 mod qvs20_currency_mod;
 mod web_sys_mod;
 
-use crate::idb_mod as idb;
-use web_sys_mod as w;
+use crate::web_sys_mod as w;
 
 #[wasm_bindgen(start)]
 /// To start the Wasm application, wasm_bindgen runs this functions
@@ -24,11 +24,11 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
         "indexeddb_from_rust v{}",
         env!("CARGO_PKG_VERSION")
     ));
-    idb::check_browser_capability();
+    crate::idb_mod::check_browser_capability();
 
     //async block
     wasm_bindgen_futures::spawn_local(async {
-        idb::init_upgrade_db_currency_rates().await;
+        crate::idb_currdb_mod::init_upgrade_currdb().await;
         main_page_mod::main_page().await;
     });
 

@@ -62,7 +62,7 @@ pub fn span_reload_on_click(_element_id: &str) {
             let rate = unwrap!(string_value.1["rate"].as_f64());
             let qvs20_value = crate::qvs20_currency_mod::serialize_qvs20_single_row(name, rate);
             idb::put_key_value(
-                "currency_rates",
+                "currdb",
                 "currency",
                 &string_value.0.to_uppercase(),
                 &qvs20_value,
