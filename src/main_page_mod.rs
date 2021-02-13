@@ -53,7 +53,9 @@ pub fn span_reload_on_click(_element_id: &str) {
         // it is not an array !
         let json_map_string_value = unwrap!(v.as_object());
 
-        // TODO: use one big transaction instead of many small transactions
+        let db = idb::Database::use_db("currdb").await;
+        let tx = db.transaction();
+        let store = tx.get_object_store_readwrite("currency");
         for string_value in json_map_string_value {
             // the value will have 2 columns: name(string) and rate(f64)
             // indexed_db would serialize rust object to json and then in javascript json to javascript object and then store
@@ -61,15 +63,9 @@ pub fn span_reload_on_click(_element_id: &str) {
             let name = unwrap!(string_value.1["name"].as_str());
             let rate = unwrap!(string_value.1["rate"].as_f64());
             let qvs20_value = crate::qvs20_currency_mod::serialize_qvs20_single_row(name, rate);
-            idb::put_key_value(
-                "currdb",
-                "currency",
-                &string_value.0.to_uppercase(),
-                &qvs20_value,
-            )
-            .await
-            .unwrap();
+            store.put(&string_value.0.to_uppercase(), &qvs20_value);
         }
+        tx.close();
     });
 }
 

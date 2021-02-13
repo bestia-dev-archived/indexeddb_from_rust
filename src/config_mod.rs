@@ -4,8 +4,14 @@
 
 use crate::idb_mod as idb;
 
+pub async fn currdb() -> idb::Database {
+    idb::Database::use_db("currdb").await
+}
+
 pub async fn set_base_currency(iso_code: &str) {
-    idb::put_key_value("currdb", "config", "base_currency", iso_code)
+    currdb()
+        .await
+        .put_key_value("config", "base_currency", iso_code)
         .await
         .unwrap();
 }

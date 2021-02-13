@@ -5,14 +5,14 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.213.1451  date: 2021-02-13 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.213.1619  date: 2021-02-13 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-443-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-462-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-43-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-82-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-83-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-15-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
@@ -157,3 +157,20 @@ The indexeddb value is a javascript object. That is really practical for javascr
 Rust structs must be serialized to json string, then javascript converts this json string into a javascript object and store it.  
 I will rather store only rust/javascript strings into key-value. I choose the string data format QVS20, great for tables.  
 It is very easy to parse.  
+
+## idb rust functions
+
+### init_upgrade_db
+
+First of all the db must be initialized and upgraded.  
+`idb_mod::Database::init_upgrade_db("currdb", 2, "upgrade_currdb").await;`  
+When the version is greater that the existing db version, it calls the rust function with the name in 3rd string parameter.  
+This function must be exported from rust to javascript with the attribute `#[wasm_bindgen]`.  
+The function accepts 4 parameters: `db: JsValue, old_version: JsValue, new_version: JsValue, transaction: JsValue,`.  
+For different versions we can prepare different functions to make it more readable.  
+We create a new store with: `db.create_object_store("currency");`.  
+We put data in the store with the use of Transaction (tx). First we define the store and then put the data:  
+`let cfg = tx.get_object_store("config");`  
+`cfg.put("base_currency", "EUR");`  
+
+

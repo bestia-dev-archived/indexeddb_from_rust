@@ -5,6 +5,7 @@
 // It uses the idb javascript library, idb_exports.ts and idb_imports_mod.rs
 
 use crate::idb_imports_mod as idbjs;
+use crate::web_sys_mod as w;
 use unwrap::unwrap;
 use wasm_bindgen::JsValue;
 
@@ -46,6 +47,10 @@ impl Database {
     pub fn create_object_store(&self, store_name: &str) {
         idbjs::create_object_store(self.db.clone(), store_name);
     }
+    pub fn transaction(&self) -> Transaction {
+        let tx = idbjs::transaction(&self.db);
+        Transaction::from(tx)
+    }
     pub async fn put_key_value(&self, store: &str, key: &str, value: &str) -> Result<(), JsValue> {
         idbjs::db_put_key_value(&self.db, store, key, value).await
     }
@@ -65,11 +70,20 @@ pub struct Transaction {
     tx: JsValue,
 }
 impl Transaction {
-    pub fn get_object_store(&self, store_name: &str) -> ObjectStoreInsideTransaction {
-        let tx_ob_st = idbjs::get_object_store_from_transaction(&self.tx, store_name);
+    pub fn get_object_store_versionchange(&self, store_name: &str) -> ObjectStoreInsideTransaction {
+        let tx_ob_st = idbjs::get_object_store_from_transaction_versionchange(&self.tx, store_name);
         let tx_ob_st = ObjectStoreInsideTransaction::from(tx_ob_st);
         // return
         tx_ob_st
+    }
+    pub fn get_object_store_readwrite(&self, store_name: &str) -> ObjectStoreInsideTransaction {
+        let tx_ob_st = idbjs::get_object_store_from_transaction_readwrite(&self.tx, store_name);
+        let tx_ob_st = ObjectStoreInsideTransaction::from(tx_ob_st);
+        // return
+        tx_ob_st
+    }
+    pub fn close(&self) {
+        idbjs::close_transaction(&self.tx);
     }
 }
 /// Transaction from JsValue

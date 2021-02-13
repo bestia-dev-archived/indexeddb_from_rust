@@ -12,7 +12,7 @@ pub async fn init_upgrade_currdb() {
     idb::Database::init_upgrade_db("currdb", 2, "upgrade_currdb").await;
 }
 
-/// upgrade_currdb is called from javascript init_upgrade_db()
+/// upgrade_currdb is called from javascript function init_upgrade_db()
 #[wasm_bindgen]
 #[allow(dead_code)]
 pub fn upgrade_currdb(
@@ -46,10 +46,8 @@ fn upgrade_from_v00_to_v01(db: &idb::Database) {
 fn upgrade_from_v01_to_v02(db: &idb::Database, tx: &idb::Transaction) {
     w::debug_write("upgrade_from_v01_to_v02");
     db.create_object_store("config");
-    w::debug_write("after create_object_store");
-    let cfg = tx.get_object_store("config");
-
-    w::debug_write("after get_object_store_from_transaction");
+    let cfg = tx.get_object_store_versionchange("config");
+    // this is a special put inside a transaction, that is inside version upgrade
     cfg.put("base_currency", "EUR");
     cfg.put("quote_currency", "USD");
     cfg.put("rate", "1.21");
