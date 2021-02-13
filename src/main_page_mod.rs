@@ -3,11 +3,11 @@
 use unwrap::unwrap;
 use wasm_bindgen::prelude::*;
 //use wasm_bindgen::{JsCast, JsValue};
+use serde_json::Value;
 use wasm_bindgen::JsCast;
 
-use crate::idb_mod as idb;
-use crate::on_click;
 use crate::web_sys_mod as w;
+use crate::{config_mod, on_click};
 
 /// fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting
 pub async fn main_page() {
@@ -39,34 +39,35 @@ pub async fn main_page() {
 /// reload json from floatrates.com and save to indexeddb
 pub fn span_reload_on_click(_element_id: &str) {
     wasm_bindgen_futures::spawn_local(async {
-        let resp_body_text = w::fetch_response("http://www.floatrates.com/daily/eur.json").await;
-        // there is 8 special characters I want to avoid
-        let resp_body_text = resp_body_text
-            .replace(r"\u00F3", "ó")
-            .replace(r"\t", "")
-            .replace(r"\u02bb", "ʻ")
-            .replace(r"\u00e3", "ã")
-            .replace(r"\u00e9", "é")
-            .replace(r"\u00ed", "í");
-        // Parse the string of data into serde_json::Value.
-        let v: serde_json::Value = unwrap!(serde_json::from_str(&resp_body_text));
-        // it is not an array !
+        let base_currency = config_mod::get_base_currency().await;
+        let v = fetch_and_serde_json(&base_currency).await;
         let json_map_string_value = unwrap!(v.as_object());
-
-        let db = idb::Database::use_db("currdb").await;
-        let tx = db.transaction();
-        let store = tx.get_object_store_readwrite("currency");
-        for string_value in json_map_string_value {
-            // the value will have 2 columns: name(string) and rate(f64)
-            // indexed_db would serialize rust object to json and then in javascript json to javascript object and then store
-            // I will use only strings. The conversion to/from string will be in QVS20 format for compact, ubiquitous and fast conversion
-            let name = unwrap!(string_value.1["name"].as_str());
-            let rate = unwrap!(string_value.1["rate"].as_f64());
-            let qvs20_value = crate::qvs20_currency_mod::serialize_qvs20_single_row(name, rate);
-            store.put(&string_value.0.to_uppercase(), &qvs20_value);
-        }
-        tx.close();
+        crate::currency_mod::fill_currency_store(json_map_string_value).await;
     });
+}
+
+async fn fetch_and_serde_json(base_currency: &str) -> Value {
+    let url = format!(
+        "http://www.floatrates.com/daily/{}.json",
+        base_currency.to_lowercase()
+    );
+    let resp_body_text = w::fetch_response(&url).await;
+    // there is 8 special characters I want to avoid
+    let resp_body_text = resp_body_text
+        .replace(r"\t", "")
+        .replace(r"\u02bb", "ʻ")
+        .replace(r"\u00e3", "ã")
+        .replace(r"\u00f3", "ó")
+        .replace(r"\u00e9", "é")
+        .replace(r"\u00ed", "í");
+    if resp_body_text.contains(r"\") {
+        w::debug_write("error: resp_body_text contains backslash");
+        //w::debug_write(&resp_body_text);
+    }
+    // Parse the string of data into serde_json::Value.
+    let json_value: serde_json::Value = unwrap!(serde_json::from_str(&resp_body_text));
+    // return
+    json_value
 }
 
 /// event handler for 0-9 numeric cells
@@ -83,7 +84,7 @@ pub fn div_cell_on_click(element_id: &str) {
 }
 
 /// decimal dot can be used only once
-pub fn div_cell_dot_on_click(element_id: &str) {
+pub fn div_cell_dot_on_click(_element_id: &str) {
     let mut input = w::get_text("div_input_number");
     if !input.contains(".") {
         input.push('.');

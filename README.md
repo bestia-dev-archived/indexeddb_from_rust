@@ -5,14 +5,14 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.213.1619  date: 2021-02-13 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.213.1809  date: 2021-02-13 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-462-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-485-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-43-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-83-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-84-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-15-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
@@ -169,8 +169,27 @@ This function must be exported from rust to javascript with the attribute `#[was
 The function accepts 4 parameters: `db: JsValue, old_version: JsValue, new_version: JsValue, transaction: JsValue,`.  
 For different versions we can prepare different functions to make it more readable.  
 We create a new store with: `db.create_object_store("currency");`.  
-We put data in the store with the use of Transaction (tx). First we define the store and then put the data:  
+We put data in the store with the use of Transaction mode versionchange.  
+First we define the store and then put the data:  
 `let cfg = tx.get_object_store("config");`  
 `cfg.put("base_currency", "EUR");`  
 
+### modify one data with implicit transaction
+
+```rust
+let db = idb::Database::use_db("currdb").await;
+db.put_key_value("store", "key", "value").await.unwrap();
+```
+
+### modify many data in one transaction
+
+```rust
+let db = idb::Database::use_db("currdb").await;
+let tx = db.transaction();
+let store = tx.get_object_store_readwrite("currency");
+store.put("a", "a");
+store.put("b", "b");
+store.put("c", "c");
+tx.close();
+```
 

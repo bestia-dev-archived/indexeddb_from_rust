@@ -5,11 +5,11 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 
 mod config_mod;
+mod currency_mod;
 mod idb_currdb_mod;
 mod idb_imports_mod;
 mod idb_mod;
 mod main_page_mod;
-mod qvs20_currency_mod;
 mod web_sys_mod;
 
 use crate::web_sys_mod as w;

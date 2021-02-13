@@ -30,10 +30,10 @@ pub fn upgrade_currdb(
         old_version, new_version
     ));
 
-    if old_version <= 0 {
+    if old_version < 1 {
         upgrade_from_v00_to_v01(&db);
     }
-    if old_version <= 1 {
+    if old_version < 2 {
         upgrade_from_v01_to_v02(&db, &tx);
     }
 }

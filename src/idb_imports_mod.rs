@@ -23,12 +23,12 @@ extern "C" {
     #[wasm_bindgen(catch)]
     pub(crate) async fn put_key_value(db_name: &str, store: &str, key: &str, value: &str, ) -> Result<(), JsValue>;
     pub(crate) async fn get_key_value(db_name: &str, store: &str, key: &str, ) -> JsValue;
-    pub(crate) fn transaction(db:&JsValue) ->JsValue;
+    pub(crate) fn transaction_open(db:&JsValue) ->JsValue;
     pub(crate) fn create_object_store(db:JsValue,store_name:&str);
     pub(crate) fn get_object_store_from_transaction_versionchange(tx:&JsValue,store_name:&str) -> JsValue;
     pub(crate) fn get_object_store_from_transaction_readwrite(tx:&JsValue,store_name:&str) -> JsValue;
     pub(crate) fn transaction_object_store_put(tx_ob_st: JsValue, key:&str, value:&str);
     #[wasm_bindgen(catch)]
     pub(crate) async fn db_put_key_value(db:&JsValue, store:&str, key:&str, value:&str) -> Result<(), JsValue>;
-    pub(crate) fn close_transaction(tx:&JsValue);
+    pub(crate) fn transaction_close(tx:&JsValue);
 }

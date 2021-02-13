@@ -47,8 +47,8 @@ impl Database {
     pub fn create_object_store(&self, store_name: &str) {
         idbjs::create_object_store(self.db.clone(), store_name);
     }
-    pub fn transaction(&self) -> Transaction {
-        let tx = idbjs::transaction(&self.db);
+    pub fn transaction_open(&self) -> Transaction {
+        let tx = idbjs::transaction_open(&self.db);
         Transaction::from(tx)
     }
     pub async fn put_key_value(&self, store: &str, key: &str, value: &str) -> Result<(), JsValue> {
@@ -83,7 +83,7 @@ impl Transaction {
         tx_ob_st
     }
     pub fn close(&self) {
-        idbjs::close_transaction(&self.tx);
+        idbjs::transaction_close(&self.tx);
     }
 }
 /// Transaction from JsValue
