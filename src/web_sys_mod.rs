@@ -86,19 +86,3 @@ pub async fn fetch_response(url: &str) -> String {
     // returns response as String
     txt_response
 }
-
-/// only the html between the <body> </body>
-/// it must be a SINGLE root node
-pub fn between_body_tag(resp_body_text: &str) -> String {
-    let pos1 = resp_body_text.find("<body>").unwrap_or(0);
-    let pos2 = resp_body_text.find("</body>").unwrap_or(0);
-    // return
-    if pos1 == 0 {
-        resp_body_text.to_string()
-    } else {
-        #[allow(clippy::integer_arithmetic)]
-        {
-            unwrap!(resp_body_text.get(pos1 + 6..pos2)).to_string()
-        }
-    }
-}

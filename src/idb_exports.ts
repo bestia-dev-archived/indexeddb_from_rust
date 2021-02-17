@@ -21,12 +21,11 @@ export function check_browser_capability(){
 
 /// Init db with upgrade (passed as function name), returns a promise
 /// It must be the first command for indexeddb and it must have enough time to upgrade before later commands.
-export async function init_upgrade_db(db_name:string, version:number, upgrade_callback_fn_name:string) {
+export async function init_upgrade_db(db_name:string, version:number, rust_closure_for_upgrade:any) {
     console.log("init_upgrade_db");
     let db = await idb.openDB(db_name,version, {
         upgrade(db, oldVersion, newVersion, transaction) {
-            //call an exported rust function by name:string
-            (<any>rust)[upgrade_callback_fn_name](db, oldVersion, newVersion, transaction);
+            rust_closure_for_upgrade(db, oldVersion, newVersion, transaction);
         },
     });
     return db;
@@ -51,6 +50,11 @@ export function get_object_store_from_transaction_readwrite(tx:idb.IDBPTransacti
 
 // put inside a transaction_object_store
 export function transaction_object_store_put(tx_ob_st: any, key:string, value:string) {
+    tx_ob_st.put(value,key);
+}
+
+// put inside a transaction_object_store
+export function transaction_object_store_put_js_value(tx_ob_st: any, key:string, value:any) {
     tx_ob_st.put(value,key);
 }
 

@@ -4,12 +4,14 @@
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 
-mod config_mod;
-mod currency_mod;
-mod idb_currdb_mod;
+mod currdb_config_mod;
+mod currdb_currency_mod;
+mod currdb_mod;
 mod idb_imports_mod;
 mod idb_mod;
-mod main_page_mod;
+mod page_main_mod;
+mod page_units_mod;
+mod utils_mod;
 mod web_sys_mod;
 
 use crate::web_sys_mod as w;
@@ -28,8 +30,8 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
 
     //async block
     wasm_bindgen_futures::spawn_local(async {
-        crate::idb_currdb_mod::init_upgrade_currdb().await;
-        main_page_mod::main_page().await;
+        crate::currdb_mod::init_upgrade_currdb().await;
+        crate::page_main_mod::page_main().await;
     });
 
     // return

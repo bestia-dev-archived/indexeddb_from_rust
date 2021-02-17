@@ -5,8 +5,10 @@
 // It uses the idb javascript library, idb_exports.ts and idb_imports_mod.rs
 
 use crate::idb_imports_mod as idbjs;
-use crate::web_sys_mod as w;
+// use crate::web_sys_mod as w;
+use crate::currdb_mod as currdb;
 use unwrap::unwrap;
+use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 
 pub fn check_browser_capability() {
@@ -34,13 +36,17 @@ pub struct Database {
 }
 impl Database {
     /// init and upgrade
-    pub async fn init_upgrade_db(db_name: &str, version: u32, upgrade_callback_fn_name: &str) {
-        idbjs::init_upgrade_db(db_name, version, upgrade_callback_fn_name)
+    pub async fn init_upgrade_db(
+        db_name: &str,
+        version: u32,
+        rust_closure_for_upgrade: &Closure<dyn Fn(JsValue, JsValue, JsValue, JsValue)>,
+    ) {
+        idbjs::init_upgrade_db(db_name, version, rust_closure_for_upgrade)
             .await
             .unwrap();
     }
     pub async fn use_db(db_name: &str) -> Self {
-        let db = idbjs::use_db(db_name).await;
+        let db = idbjs::use_db(&db_name).await;
         // return
         Database { db }
     }
@@ -110,6 +116,9 @@ pub struct ObjectStoreInsideTransaction {
 impl ObjectStoreInsideTransaction {
     pub fn put(&self, key: &str, value: &str) {
         idbjs::transaction_object_store_put(self.tx_ob_st.clone(), key, value);
+    }
+    pub fn put_js_value(&self, key: &str, value: &JsValue) {
+        idbjs::transaction_object_store_put_js_value(self.tx_ob_st.clone(), key, value);
     }
 }
 /// ObjectStoreInsideTransaction from JsValue

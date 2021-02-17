@@ -5,8 +5,6 @@
 // This import paths must be defined in tsconfig.json including the .d.ts types
 // because the difference of folder structure and url paths.
 import * as idb from '/indexeddb_from_rust/idb/index.js';
-// the functions exported from rust are needed for the upgrade callback
-import * as rust from '/indexeddb_from_rust/pkg/indexeddb_from_rust.js';
 /// does the browser have indexedDB
 export function check_browser_capability() {
     if (!window.indexedDB) {
@@ -18,12 +16,11 @@ export function check_browser_capability() {
 }
 /// Init db with upgrade (passed as function name), returns a promise
 /// It must be the first command for indexeddb and it must have enough time to upgrade before later commands.
-export async function init_upgrade_db(db_name, version, upgrade_callback_fn_name) {
+export async function init_upgrade_db(db_name, version, rust_closure_for_upgrade) {
     console.log("init_upgrade_db");
     let db = await idb.openDB(db_name, version, {
         upgrade(db, oldVersion, newVersion, transaction) {
-            //call an exported rust function by name:string
-            rust[upgrade_callback_fn_name](db, oldVersion, newVersion, transaction);
+            rust_closure_for_upgrade(db, oldVersion, newVersion, transaction);
         },
     });
     return db;
@@ -44,6 +41,10 @@ export function get_object_store_from_transaction_readwrite(tx, store_name) {
 }
 // put inside a transaction_object_store
 export function transaction_object_store_put(tx_ob_st, key, value) {
+    tx_ob_st.put(value, key);
+}
+// put inside a transaction_object_store
+export function transaction_object_store_put_js_value(tx_ob_st, key, value) {
     tx_ob_st.put(value, key);
 }
 /// use_db returns a promise. 

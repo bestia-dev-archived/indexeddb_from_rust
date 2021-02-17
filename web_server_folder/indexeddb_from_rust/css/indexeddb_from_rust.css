@@ -59,21 +59,26 @@ a{
     grid-template-rows: 9vh 15vh 13vh 15vh 48vh;
 }
 
-#div_title{
-    font-size: 20px;
+#div_main_header{
+    display: grid;
+    width:100vw;
+    grid-template-columns: 80vw 10vw 10vw; 
+    grid-template-rows: 9vh;
+    line-height: 9vh;
     background-color:var(--b_color_title);
     color:var(--f_color_title);
-    line-height: 9vh;
-    padding-left: 3vw;
+    font-size: 20px;
 }
 
-#span_reload{
+#div_main_title{
+    padding-left: 3vw;
+}
+#div_reload{
     cursor: pointer;
     float:right;
     padding-right: 5vw;
 }
-
-#span_hamburger_button{
+#div_hamburger_button{
     cursor: pointer;
     float:right;
     padding-right: 5vw;
@@ -96,12 +101,6 @@ a{
     padding-right: 5vw;
 }
 
-#span_quote_currency{
-    cursor: pointer;
-    float:right;
-    padding-right: 5vw;
-}
-
 #div_toolbar{
     cursor: pointer;
     font-size: 20px;
@@ -111,10 +110,20 @@ a{
 }
 
 #div_output{
+    display: grid;
+    width:100vw;
+    grid-template-columns: 75vw 25vw; 
+    grid-template-rows: 15vh;
     font-size: 30px;
     line-height: 15vh;
     padding-left: 3vw;
     background-color: var(--b_color_input_output);
+}
+
+#div_output_unit{
+    cursor: pointer;
+    float:right;
+    padding-right: 5vw;
 }
 
 #div_numeric_pad_grid{
@@ -182,4 +191,70 @@ a{
     border-style: solid;
     background-color:var(--b_color_toolbar);
     padding: 2px;
+}
+
+/* page_unit*/
+
+#div_units_grid{
+    /* using simple css-grid for the layout of the grid */
+    display: grid;
+    width:100vw;
+    grid-template-columns: 100vw; 
+    grid-template-rows: 9vh 91vh;
+}
+#div_units_header{
+    display: grid;
+    width:100vw;
+    grid-template-columns: 20vw 80vw; 
+    grid-template-rows: 9vh;
+    line-height: 9vh;
+    background-color:var(--b_color_title);
+    color:var(--f_color_title);
+}
+#div_back{
+    font-size: 20px;
+    padding-left: 3vw;
+}
+#div_units_title{
+    font-size: 20px;
+    padding-left: 3vw;
+}
+#div_list_grid{
+    display: grid;
+    width:100vw;
+    grid-template-columns: 20vw 40vw 40vw; 
+    grid-template-rows: repeat(auto-fill, 7vh);
+    line-height: 7vh;
+    font-size: 30px;
+    background-color: var(--b_color_input_output);
+    border-top: 1px;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+#div_unit{
+    cursor: pointer;
+    padding-left: 1vw;
+    border-top: 0px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+}
+#div_name{
+    padding-left: 2vw;
+    border-top: 0px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+}
+#div_rate{
+    float:right;
+    padding-right: 5vw;
+    border-top: 0px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
 }

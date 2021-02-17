@@ -5,16 +5,16 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.213.1809  date: 2021-02-13 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.217.1927  date: 2021-02-17 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-485-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-43-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-84-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-688-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-58-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-88-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-15-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
 [comment]: # (lmake_lines_of_code end)
 
@@ -139,7 +139,7 @@ The imported async fn needs to be await just like rust functions. The macro wasm
 `let currdb = open_db().await.unwrap();`  
 Some of the functions are async and others are not. It can lead to strange problems if an async function is used as normal. This is a thing to be careful about.
 
-## currency exchange rates
+## Currency exchange rates
 
 I will get the daily exchange rate in json format from:  
 <http://www.floatrates.com/daily/eur.json>  
@@ -158,6 +158,15 @@ Rust structs must be serialized to json string, then javascript converts this js
 I will rather store only rust/javascript strings into key-value. I choose the string data format QVS20, great for tables.  
 It is very easy to parse.  
 
+
+## serde-wasm-bindgen
+
+Maybe it is better to use [serde-wasm-bindgen](https://github.com/cloudflare/serde-wasm-bindgen) to work directly with javascript values from rust, because indexeddb stores javascript objects. And the user interface needs exactly the same javascript objects. There s usually very little processing of data from the database to the user interface.  
+From Rust to javascript:  
+`serde_wasm_bindgen::to_value(&some_supported_rust_value)`  
+From javascript to rust:  
+`let value: SomeSupportedRustType = serde_wasm_bindgen::from_value(value)?;`  
+
 ## idb rust functions
 
 ### init_upgrade_db
@@ -168,10 +177,10 @@ When the version is greater that the existing db version, it calls the rust func
 This function must be exported from rust to javascript with the attribute `#[wasm_bindgen]`.  
 The function accepts 4 parameters: `db: JsValue, old_version: JsValue, new_version: JsValue, transaction: JsValue,`.  
 For different versions we can prepare different functions to make it more readable.  
-We create a new store with: `db.create_object_store("currency");`.  
+We create a new store with: `db.create_object_store("Currency");`.  
 We put data in the store with the use of Transaction mode versionchange.  
 First we define the store and then put the data:  
-`let cfg = tx.get_object_store("config");`  
+`let cfg = tx.get_object_store("Config");`  
 `cfg.put("base_currency", "EUR");`  
 
 ### modify one data with implicit transaction
@@ -186,7 +195,7 @@ db.put_key_value("store", "key", "value").await.unwrap();
 ```rust
 let db = idb::Database::use_db("currdb").await;
 let tx = db.transaction();
-let store = tx.get_object_store_readwrite("currency");
+let store = tx.get_object_store_readwrite("Currency");
 store.put("a", "a");
 store.put("b", "b");
 store.put("c", "c");
