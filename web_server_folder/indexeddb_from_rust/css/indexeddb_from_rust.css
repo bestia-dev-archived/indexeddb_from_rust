@@ -51,6 +51,8 @@ a{
     height: 100vh;
 }
 
+/* region: page_main */
+
 #div_main_grid{
     /* using simple css-grid for the layout of the grid */
     display: grid;
@@ -193,14 +195,15 @@ a{
     padding: 2px;
 }
 
-/* page_unit*/
+/* endregion: page_main */
+
+/* region: page_unit */
 
 #div_units_grid{
     /* using simple css-grid for the layout of the grid */
     display: grid;
     width:100vw;
-    grid-template-columns: 100vw; 
-    grid-template-rows: 9vh 91vh;
+    grid-template-rows: 9vh auto;
 }
 #div_units_header{
     display: grid;
@@ -222,9 +225,8 @@ a{
 #div_list_grid{
     display: grid;
     width:100vw;
-    grid-template-columns: 20vw 40vw 40vw; 
+    grid-template-columns: 20vw 50vw 30vw; 
     grid-template-rows: repeat(auto-fill, 7vh);
-    line-height: 7vh;
     font-size: 30px;
     background-color: var(--b_color_input_output);
     border-top: 1px;
@@ -232,7 +234,12 @@ a{
     border-left: 0px;
     border-right: 0px;
 }
-#div_unit{
+
+/*the list has many rows, instead of id, here I use class*/
+.class_unit{
+    display: flex;
+    align-items:center;
+    justify-content: left;
     cursor: pointer;
     padding-left: 1vw;
     border-top: 0px;
@@ -241,7 +248,11 @@ a{
     border-right: 0px;
     border-style: solid;
 }
-#div_name{
+.class_unit_name{
+    text-align: center;
+    /* padding for central vertical alignment*/
+    padding: 3vh 0;
+    font-size: 12px;
     padding-left: 2vw;
     border-top: 0px;
     border-bottom: 1px;
@@ -249,8 +260,11 @@ a{
     border-right: 0px;
     border-style: solid;
 }
-#div_rate{
-    float:right;
+.class_rate{
+    text-align: right;
+    /* padding for central vertical alignment*/
+    padding: 3vh 0;
+    font-size: 18px;
     padding-right: 5vw;
     border-top: 0px;
     border-bottom: 1px;
@@ -258,3 +272,5 @@ a{
     border-right: 0px;
     border-style: solid;
 }
+
+/* endregion: page_unit */

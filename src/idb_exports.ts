@@ -101,3 +101,21 @@ export async function transaction_close(tx:idb.IDBPTransaction<unknown, [string]
 export async function db_put_key_value(db:idb.IDBPDatabase<unknown>, store:string, key:string, value:string){
     db.put(store, value, key);
 }
+
+export async function cursor(db:idb.IDBPDatabase<unknown>, store_name:string){
+    let cursor = await db.transaction(store_name).store.openCursor();
+    return cursor;
+}
+
+export async function cursor_continue(cursor:idb.IDBPCursorWithValue<unknown, [string], string, unknown, "readonly">){
+    let new_cursor_or_null = await cursor.continue();
+    return new_cursor_or_null;
+}
+
+export function cursor_key(cursor:idb.IDBPCursorWithValue<unknown, [string], string, unknown, "readonly">){
+    return cursor.key;
+}
+
+export function cursor_value(cursor:idb.IDBPCursorWithValue<unknown, [string], string, unknown, "readonly">){
+    return cursor.value;
+}

@@ -8,9 +8,10 @@ use wasm_bindgen::prelude::*;
 use serde_json::Value;
 use wasm_bindgen::JsCast;
 
-use crate::utils_mod as ut;
+use crate::currdb_currency_mod::*;
 use crate::web_sys_mod as w;
 use crate::{currdb_config_mod, on_click};
+use crate::{idb_mod, utils_mod as ut};
 
 /// fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting
 pub async fn page_units() {
@@ -50,16 +51,31 @@ pub async fn page_units() {
     // repeat the template with data from indexed db in template inside div_list_grid
 
     // read from indexed db row by row
+    use crate::currdb_mod::{Databases, ObjectStores};
+    use crate::idb_mod as idb;
+    use strum::AsStaticRef;
+    let db = idb::Database::use_db(&Databases::Currdb.as_static()).await;
+    let cursor = db.get_cursor(ObjectStores::Currency.as_static()).await;
+    loop {
+        let key = cursor.get_key();
+        let key: String = unwrap!(serde_wasm_bindgen::from_value(key));
+        let value = cursor.get_value();
+        let fields: CurrencyFields = unwrap!(serde_wasm_bindgen::from_value(value));
 
+        let template_with_data = ut::replace_wt_placeholder(&template, "wt_unit", &key);
+        let template_with_data =
+            ut::replace_wt_placeholder(&template_with_data, "wt_name", &fields.name);
+        let template_with_data = ut::replace_wt_placeholder(
+            &template_with_data,
+            "wt_rate",
+            &format!("{:.3}", fields.rate),
+        );
 
-    for _x in 0..5 {
-        let template_with_data = ut::replace_wt_placeholder(&template, "wt_unit", "111");
-        let template_with_data = ut::replace_wt_placeholder(&template_with_data, "wt_name", "222");
-        let template_with_data = ut::replace_wt_placeholder(&template_with_data, "wt_rate", "333");
         html_list.push_str(&template_with_data);
-        w::debug_write(&template_with_data);
+        if cursor.next().await.is_none() {
+            break;
+        }
     }
-    w::debug_write(&html_list);
     w::set_inner_html("div_list_grid", &html_list);
 
     // event handlers

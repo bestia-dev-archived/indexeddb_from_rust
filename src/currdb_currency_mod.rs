@@ -4,16 +4,16 @@
 
 use crate::currdb_mod::{Databases, ObjectStores};
 use crate::idb_mod as idb;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 use strum::AsStaticRef;
 use unwrap::unwrap;
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 /// fields in the value column of key-value currency
 pub struct CurrencyFields {
-    name: String,
-    rate: f64,
+    pub name: String,
+    pub rate: f64,
 }
 
 pub async fn fill_currency_store(json_map_string_value: &Map<String, Value>) {

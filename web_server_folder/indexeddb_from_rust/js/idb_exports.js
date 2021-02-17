@@ -84,4 +84,18 @@ export async function transaction_close(tx) {
 export async function db_put_key_value(db, store, key, value) {
     db.put(store, value, key);
 }
+export async function cursor(db, store_name) {
+    let cursor = await db.transaction(store_name).store.openCursor();
+    return cursor;
+}
+export async function cursor_continue(cursor) {
+    let new_cursor_or_null = await cursor.continue();
+    return new_cursor_or_null;
+}
+export function cursor_key(cursor) {
+    return cursor.key;
+}
+export function cursor_value(cursor) {
+    return cursor.value;
+}
 //# sourceMappingURL=idb_exports.js.map

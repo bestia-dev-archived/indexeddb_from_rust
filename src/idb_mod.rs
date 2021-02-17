@@ -17,17 +17,19 @@ pub fn check_browser_capability() {
 
 pub async fn put_key_value(
     db_name: &str,
-    store: &str,
+    store_name: &str,
     key: &str,
     value: &str,
 ) -> Result<(), JsValue> {
     // return
-    idbjs::put_key_value(db_name, store, key, value).await
+    idbjs::put_key_value(db_name, store_name, key, value).await
 }
 
-pub async fn get_key_value(db_name: &str, store: &str, key: &str) -> String {
+pub async fn get_key_value(db_name: &str, store_name: &str, key: &str) -> String {
     // return
-    unwrap!(idbjs::get_key_value(db_name, store, key).await.as_string())
+    unwrap!(idbjs::get_key_value(db_name, store_name, key)
+        .await
+        .as_string())
 }
 
 // region: Database
@@ -57,8 +59,18 @@ impl Database {
         let tx = idbjs::transaction_open(&self.db);
         Transaction::from(tx)
     }
-    pub async fn put_key_value(&self, store: &str, key: &str, value: &str) -> Result<(), JsValue> {
-        idbjs::db_put_key_value(&self.db, store, key, value).await
+    pub async fn put_key_value(
+        &self,
+        store_name: &str,
+        key: &str,
+        value: &str,
+    ) -> Result<(), JsValue> {
+        idbjs::db_put_key_value(&self.db, store_name, key, value).await
+    }
+    pub async fn get_cursor(&self, store_name: &str) -> Cursor {
+        let cursor = idbjs::cursor(&self.db, store_name).await;
+        //return
+        Cursor { cursor }
     }
 }
 /// Database from JsValue
@@ -137,3 +149,44 @@ impl From<ObjectStoreInsideTransaction> for JsValue {
     }
 }
 // endregion: ObjectStoreInsideTransaction
+
+// region: Cursor
+pub struct Cursor {
+    cursor: JsValue,
+}
+impl Cursor {
+    // return None when is end of cursor
+    pub async fn next(&self) -> Option<()> {
+        // a new cursor ?
+        let cursor = idbjs::cursor_continue(&self.cursor).await;
+        // return
+        if cursor.is_null() {
+            return None;
+        } else {
+            return Some(());
+        }
+    }
+    pub fn get_key(&self) -> JsValue {
+        idbjs::cursor_key(&self.cursor)
+    }
+    pub fn get_value(&self) -> JsValue {
+        idbjs::cursor_value(&self.cursor)
+    }
+}
+/// Cursor from JsValue
+impl From<JsValue> for Cursor {
+    /// Cursor from JsValue
+    fn from(cursor: JsValue) -> Self {
+        // return
+        Cursor { cursor }
+    }
+}
+/// Cursor into JsValue
+impl From<Cursor> for JsValue {
+    /// Cursor into JsValue
+    fn from(cr: Cursor) -> JsValue {
+        cr.cursor.clone()
+    }
+}
+
+// endregion: Cursor
