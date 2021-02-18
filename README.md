@@ -44,7 +44,8 @@ Javascript has changed over time. Javascript is now in ES2020 edition.
 But Typescript is even better for me. I will write some typescript code, transpile it to javascript and invoke it from rust.  
 In the end the library will use only the javascript file. Typescript is used only in development.  
 
-@startuml
+```plantuml
+@startuml idbrDiagram
 [rust code] ..> [idbr]
 [idbr] ..> [idbr_imports]
 [idbr_imports] ..> [idb_exports]
@@ -56,6 +57,9 @@ note right of (idb): javascript library with async/await
 note right of (rust code): async/await
 note right of (indexeddb): no support for async/await
 @enduml
+```
+
+![idbrDiagram](idbrDiagram.svg)
 
 ## Typescript adventure
 
