@@ -63,6 +63,7 @@ note right of (indexeddb): supported by all major browsers\nbut no support for a
   ```
 
 </details>
+
 ![idbrDiagram](images/idbrDiagram.svg)
 
 ## Typescript adventure
