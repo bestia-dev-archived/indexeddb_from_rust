@@ -56,6 +56,8 @@ pub async fn page_units() {
     use strum::AsStaticRef;
     let db = idb::Database::use_db(&Databases::Currdb.as_static()).await;
     let cursor = db.get_cursor(ObjectStores::Currency.as_static()).await;
+    // I cannot implement the iterator trait because it is sync, but I need async
+    // a simple loop will be enough
     loop {
         let key = cursor.get_key();
         let key: String = unwrap!(serde_wasm_bindgen::from_value(key));

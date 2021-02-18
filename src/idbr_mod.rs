@@ -5,8 +5,6 @@
 // It uses the idb javascript library, idb_exports.ts and idbr_imports_mod.rs
 
 use crate::idbr_imports_mod as idbjs;
-// use crate::web_sys_mod as w;
-use crate::currdb_mod as currdb;
 use unwrap::unwrap;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
