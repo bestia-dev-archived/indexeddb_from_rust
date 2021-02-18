@@ -59,7 +59,7 @@ note right of (indexeddb): no support for async/await
 @enduml
 ```
 
-![idbrDiagram](idbrDiagram.svg)
+![idbrDiagram](images/idbrDiagram.svg)
 
 ## Typescript adventure
 
