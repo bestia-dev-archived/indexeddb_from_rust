@@ -35,15 +35,6 @@ It is easy to see the content of indexeddb in F12. Very convenient.
 I will give a try to make diagrams with `plantuml`. Diagrams are defined using a simple and intuitive language.  
 It follows the philosophy "everything as code". So it can be easily embedded in the code or documentation.  
 The diagram can be created online on <http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80>  
-
-## indexeddb, idb, idbr
-
-The original api for `indexeddb`is too hard and very old-fashioned without async/await.  
-I will use the [idb](https://github.com/jakearchibald/idb) javascript library that makes `indexeddb` easier to use.
-Javascript has changed over time. Javascript is now in ES2020 edition.  
-But Typescript is even better for me. I will write some typescript code, transpile it to javascript and invoke it from rust.  
-In the end the library will use only the javascript file. Typescript is used only in development.  
-
 <details>
   <summary>plantuml example</summary>
 
@@ -63,6 +54,14 @@ note right of (indexeddb): supported by all major browsers\nbut no support for a
   ```
 
 </details>
+
+## indexeddb, idb, idbr
+
+The original api for `indexeddb`is too hard and very old-fashioned without async/await.  
+I will use the [idb](https://github.com/jakearchibald/idb) javascript library that makes `indexeddb` easier to use.
+Javascript has changed over time. Javascript is now in ES2020 edition.  
+But Typescript is even better for me. I will write some typescript code, transpile it to javascript and invoke it from rust.  
+In the end the library will use only the javascript file. Typescript is used only in development.  
 
 ![idbrDiagram](images/idbrDiagram.svg)
 
