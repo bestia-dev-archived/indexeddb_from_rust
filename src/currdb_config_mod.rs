@@ -3,7 +3,7 @@
 // Config is in store config_store_name in database currdb in indexeddb
 
 use crate::currdb_mod::{Databases, ObjectStores};
-use crate::idb_mod as idb;
+use crate::idbr_mod as idb;
 use strum::AsStaticRef;
 
 async fn currdb() -> idb::Database {

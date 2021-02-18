@@ -3,7 +3,7 @@
 // the store Currency in indexeddb database currdb
 
 use crate::currdb_mod::{Databases, ObjectStores};
-use crate::idb_mod as idb;
+use crate::idbr_mod as idb;
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 use strum::AsStaticRef;

@@ -1,10 +1,10 @@
-// idb_mod.rs
+// idbr_mod.rs
 
 // Objects and method to work with indexeddb.
 // Fully rust code and types. All the JsValue are wrapped.
-// It uses the idb javascript library, idb_exports.ts and idb_imports_mod.rs
+// It uses the idb javascript library, idb_exports.ts and idbr_imports_mod.rs
 
-use crate::idb_imports_mod as idbjs;
+use crate::idbr_imports_mod as idbjs;
 // use crate::web_sys_mod as w;
 use crate::currdb_mod as currdb;
 use unwrap::unwrap;

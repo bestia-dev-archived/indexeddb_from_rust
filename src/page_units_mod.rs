@@ -11,7 +11,7 @@ use wasm_bindgen::JsCast;
 use crate::currdb_currency_mod::*;
 use crate::web_sys_mod as w;
 use crate::{currdb_config_mod, on_click};
-use crate::{idb_mod, utils_mod as ut};
+use crate::{idbr_mod, utils_mod as ut};
 
 /// fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting
 pub async fn page_units() {
@@ -52,7 +52,7 @@ pub async fn page_units() {
 
     // read from indexed db row by row
     use crate::currdb_mod::{Databases, ObjectStores};
-    use crate::idb_mod as idb;
+    use crate::idbr_mod as idb;
     use strum::AsStaticRef;
     let db = idb::Database::use_db(&Databases::Currdb.as_static()).await;
     let cursor = db.get_cursor(ObjectStores::Currency.as_static()).await;

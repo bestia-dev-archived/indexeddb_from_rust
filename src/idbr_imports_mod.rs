@@ -1,9 +1,9 @@
-// idb_imports_mod
+// idbr_imports_mod
 
 // Imported functions from javascript/typescript idb_exports.ts.
 // Javascript recognizes only JsValue and &str.
-// I want to isolate this functions because they are used only by the idb_mod.
-// idb_mod should have fully rust code and types.
+// I want to isolate this functions because they are used only by the idbr_mod.
+// idbr_mod should have fully rust code and types.
 
 use wasm_bindgen::prelude::*;
 // use wasm_bindgen::JsCast;

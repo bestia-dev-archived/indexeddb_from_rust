@@ -30,11 +30,32 @@ The api is completely async, strange and in javascript. How to use it efficientl
 
 It is easy to see the content of indexeddb in F12. Very convenient.  
 
-## Workaround, javascript library
+## plantuml diagrams
 
-If the original api is too hard, maybe I can try with [idb](https://github.com/jakearchibald/idb) javascript library that makes it easier to use.
+I will give a try to make diagrams with `plantuml`. Diagrams are defined using a simple and intuitive language.  
+It follows the philosophy "everything as code". So it can be easily embedded in the code or documentation.  
+The diagram can be created online on <http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80>  
+
+## indexeddb, idb, idbr
+
+The original api for `indexeddb`is too hard and very old-fashioned without async/await.  
+I will use the [idb](https://github.com/jakearchibald/idb) javascript library that makes `indexeddb` easier to use.
 Javascript has changed over time. Javascript is now in ES2020 edition.  
-But Typescript is even better for me. I will write some typescript code and invoke it from rust.  
+But Typescript is even better for me. I will write some typescript code, transpile it to javascript and invoke it from rust.  
+In the end the library will use only the javascript file. Typescript is used only in development.  
+
+@startuml
+[rust code] ..> [idbr]
+[idbr] ..> [idbr_imports]
+[idbr_imports] ..> [idb_exports]
+[idb_exports] ..> [idb]
+[idb] ..> [indexeddb]
+
+note right of (idbr): rust library
+note right of (idb): javascript library with async/await
+note right of (rust code): async/await
+note right of (indexeddb): no support for async/await
+@enduml
 
 ## Typescript adventure
 
@@ -66,7 +87,7 @@ In the terminal I just use `tsc` to transpile my source code with settings from 
 I added this to my `cargo make` for easy developing.
 I made 2 folders `src` and `js` for typescript and javascript.  
 
-## imports
+## typescript/javascript imports
 
 I had major problems with `import` statements.  
 I tried first with `npm install --save idb`. It saves the files in a separate `node_modules` folder. That didn't work nice with my `import` statements. I don't know why.  
@@ -151,17 +172,11 @@ This PWA will have more pages. Pages are complete static html files inside tha p
 It is easy to edit and preview pages because they are complete.  
 The rust code will fetch the html, extract only the body content and set_inner_html to div_for_wasm_html_injecting.  
 
-## indexed_db key-value
-
-The indexeddb value is a javascript object. That is really practical for javascript, but not so for rust.  
-Rust structs must be serialized to json string, then javascript converts this json string into a javascript object and store it.  
-I will rather store only rust/javascript strings into key-value. I choose the string data format QVS20, great for tables.  
-It is very easy to parse.  
-
-
 ## serde-wasm-bindgen
 
-Maybe it is better to use [serde-wasm-bindgen](https://github.com/cloudflare/serde-wasm-bindgen) to work directly with javascript values from rust, because indexeddb stores javascript objects. And the user interface needs exactly the same javascript objects. There s usually very little processing of data from the database to the user interface.  
+The indexeddb is key-value. Key is string and value is any javascript object.  
+That is really practical for javascript, but not so for rust.  
+I will use [serde-wasm-bindgen](https://github.com/cloudflare/serde-wasm-bindgen) to work directly with javascript values from rust, because indexeddb stores javascript objects.  
 From Rust to javascript:  
 `serde_wasm_bindgen::to_value(&some_supported_rust_value)`  
 From javascript to rust:  
@@ -172,7 +187,7 @@ From javascript to rust:
 ### init_upgrade_db
 
 First of all the db must be initialized and upgraded.  
-`idb_mod::Database::init_upgrade_db("currdb", 2, "upgrade_currdb").await;`  
+`idbr_mod::Database::init_upgrade_db("currdb", 2, "upgrade_currdb").await;`  
 When the version is greater that the existing db version, it calls the rust function with the name in 3rd string parameter.  
 This function must be exported from rust to javascript with the attribute `#[wasm_bindgen]`.  
 The function accepts 4 parameters: `db: JsValue, old_version: JsValue, new_version: JsValue, transaction: JsValue,`.  

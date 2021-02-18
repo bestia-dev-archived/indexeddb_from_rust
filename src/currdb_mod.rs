@@ -2,7 +2,7 @@
 
 // Specific code for work with the `currdb` database
 
-use crate::idb_mod as idb;
+use crate::idbr_mod as idb;
 use crate::web_sys_mod as w;
 use strum::AsStaticRef;
 use strum_macros::*;

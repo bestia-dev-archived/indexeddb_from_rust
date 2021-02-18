@@ -7,8 +7,8 @@ use wasm_bindgen::JsValue;
 mod currdb_config_mod;
 mod currdb_currency_mod;
 mod currdb_mod;
-mod idb_imports_mod;
-mod idb_mod;
+mod idbr_imports_mod;
+mod idbr_mod;
 mod page_main_mod;
 mod page_units_mod;
 mod utils_mod;
@@ -26,7 +26,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
         "indexeddb_from_rust v{}",
         env!("CARGO_PKG_VERSION")
     ));
-    crate::idb_mod::check_browser_capability();
+    crate::idbr_mod::check_browser_capability();
 
     //async block
     wasm_bindgen_futures::spawn_local(async {
