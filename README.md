@@ -43,7 +43,8 @@ I will use the [idb](https://github.com/jakearchibald/idb) javascript library th
 Javascript has changed over time. Javascript is now in ES2020 edition.  
 But Typescript is even better for me. I will write some typescript code, transpile it to javascript and invoke it from rust.  
 In the end the library will use only the javascript file. Typescript is used only in development.  
-<div hidden>
+
+[comment]: # (
 
 ```plantuml
 @startuml
@@ -60,7 +61,7 @@ note right of (indexeddb): supported by all major browsers\nbut no support for a
 @enduml
 ```
 
-</div>
+)
 ![idbrDiagram](images/idbrDiagram.svg)
 
 ## Typescript adventure
