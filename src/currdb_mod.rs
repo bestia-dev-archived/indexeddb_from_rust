@@ -67,10 +67,15 @@ fn upgrade_from_v00_to_v01(db: &idb::Database) {
 fn upgrade_from_v01_to_v02(db: &idb::Database, tx: &idb::Transaction) {
     w::debug_write("upgrade_from_v01_to_v02");
     db.create_object_store(&ObjectStores::Config.as_static());
-    let cfg = tx.get_object_store_versionchange(&ObjectStores::Config.as_static());
+    let config_object_store = tx.get_object_store_versionchange(&ObjectStores::Config.as_static());
     // this is a special put inside a transaction, that is inside version upgrade
-    cfg.put("base_currency", "EUR");
-    cfg.put("quote_currency", "USD");
-    cfg.put("rate", "1.21");
-    cfg.put("date_fetch", "none");
+    config_object_store.put("base_currency", "EUR");
+    config_object_store.put("quote_currency", "USD");
+    config_object_store.put("rate", "1.21");
+    config_object_store.put("date_fetch", "none");
+
+    let currency_object_store =
+        tx.get_object_store_versionchange(&ObjectStores::Currency.as_static());
+    let js_value = crate::currdb_currency_mod::to_jsvalue("U.S. Dollar".to_owned(), 0.782);
+    currency_object_store.put_js_value("USD".to_owned(), &js_value);
 }

@@ -127,8 +127,8 @@ impl ObjectStoreInsideTransaction {
     pub fn put(&self, key: &str, value: &str) {
         idbjs::transaction_object_store_put(self.tx_ob_st.clone(), key, value);
     }
-    pub fn put_js_value(&self, key: &str, value: &JsValue) {
-        idbjs::transaction_object_store_put_js_value(self.tx_ob_st.clone(), key, value);
+    pub fn put_js_value(&self, key: String, value: &JsValue) {
+        idbjs::transaction_object_store_put_js_value(self.tx_ob_st.clone(), &key, value);
     }
 }
 /// ObjectStoreInsideTransaction from JsValue

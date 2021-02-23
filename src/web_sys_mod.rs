@@ -25,6 +25,24 @@ macro_rules! on_click {
     }};
 }
 
+/// list contains rows, every row item needs a separate event handler
+/// the element Id is concatenation of element_prefix plus the row_number
+#[macro_export]
+macro_rules! row_on_click {
+    ($element_prefix: expr, $row_number: expr, $function_ident: ident) => {{
+        let closure = Closure::wrap(Box::new(move || {
+            $function_ident($element_prefix, $row_number);
+        }) as Box<dyn FnMut()>);
+
+        let html_element = crate::web_sys_mod::get_html_element_by_id(&format!(
+            "{}{}",
+            $element_prefix, $row_number
+        ));
+        html_element.set_onclick(Some(closure.as_ref().unchecked_ref()));
+        closure.forget();
+    }};
+}
+
 /// return window object
 pub fn window() -> web_sys::Window {
     unwrap!(web_sys::window())
@@ -33,14 +51,18 @@ pub fn window() -> web_sys::Window {
 /// get element by id
 pub fn get_element_by_id(element_id: &str) -> web_sys::Element {
     let document = unwrap!(window().document());
-    unwrap!(document.get_element_by_id(element_id))
+    let element_opt = document.get_element_by_id(element_id);
+    if element_opt.is_none() {
+        debug_write(&format!("Error: element not exists: {}", element_id));
+    }
+    unwrap!(element_opt)
 }
 
 /// get html element by id
 pub fn get_html_element_by_id(element_id: &str) -> web_sys::HtmlElement {
     let element = get_element_by_id(element_id);
     let html_element: web_sys::HtmlElement = unwrap!(element.dyn_into::<web_sys::HtmlElement>());
-    //return
+    // return
     html_element
 }
 

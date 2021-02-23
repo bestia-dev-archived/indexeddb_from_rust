@@ -1,4 +1,5 @@
-/* css variables */  
+/* css variables */
+
 :root {
     /* color palette */
     /* use of variables: var(--color_tooltip_1); */
@@ -7,29 +8,29 @@
     --b_color_title: #8BC24A;
     --b_color_input_output: #FAFAFA;
     --b_color_toolbar: #F1F7E9;
-    --b_color_cell:#F1F7E9;
-    --b_color_cell_commands:#DDEDC8;
-    --b_color_cell_disabled:whitesmoke;
+    --b_color_cell: #F1F7E9;
+    --b_color_cell_commands: #DDEDC8;
+    --b_color_cell_disabled: whitesmoke;
     /* front color */
     --f_color_body: #4D4D4D;
     --f_color_title: #FEFFFB;
-    --f_color_cell_disabled:whitesmoke;
+    --f_color_cell_disabled: whitesmoke;
     /* border color*/
-    --brd_color_grid: #82AE4D;
+    --brd_color_layout: #82AE4D;
 }
 
-/* disable double-tap for zooming*/
+
+/* disable double-tap for zooming */
+
 * {
     touch-action: manipulation;
 }
 
-html { 
+html {
     font-family: sans-serif;
     font-size: 15px;
     background-color: var(--b_color_body);
     color: var(--f_color_body);
-    height: 100vh;
-    width: 100vw;
     /*margin auto means centered horizontally*/
     margin: 0;
     padding: 0;
@@ -37,106 +38,107 @@ html {
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
     margin: 0;
     padding: 0;
 }
 
-a{
+a {
     cursor: pointer;
 }
 
-#div_for_content{
-    height: 100vh;
+
+/* region: fixed header */
+
+.fixed_header,
+.fixed_footer {
+    position: fixed;
 }
+
+.fixed_header {
+    top: 0;
+}
+
+.fixed_footer {
+    bottom: 0;
+}
+
+
+/* endregion: fixed header */
+
+
+/* using simple `css-grid` for the layout (display: grid) 
+the grid-template-columns and grid-template-rows are defined in the html*/
+
 
 /* region: page_main */
 
-#div_main_grid{
-    /* using simple css-grid for the layout of the grid */
-    display: grid;
-    width:100vw;
-    grid-template-columns: 100vw; 
-    grid-template-rows: 9vh 15vh 13vh 15vh 48vh;
-}
-
-#div_main_header{
-    display: grid;
-    width:100vw;
-    grid-template-columns: 80vw 10vw 10vw; 
-    grid-template-rows: 9vh;
-    line-height: 9vh;
-    background-color:var(--b_color_title);
-    color:var(--f_color_title);
+#div_main_header {
+    line-height: 7vh;
+    background-color: var(--b_color_title);
+    color: var(--f_color_title);
     font-size: 20px;
 }
 
-#div_main_title{
+#div_main_title {
     padding-left: 3vw;
 }
-#div_reload{
+
+#div_reload_button {
     cursor: pointer;
-    float:right;
-    padding-right: 5vw;
-}
-#div_hamburger_button{
-    cursor: pointer;
-    float:right;
+    float: right;
     padding-right: 5vw;
 }
 
-#div_input{
-    display: grid;
-    width:100vw;
-    grid-template-columns: 75vw 25vw; 
-    grid-template-rows: 15vh;
+#div_hamburger_button {
+    cursor: pointer;
+    float: right;
+    padding-right: 5vw;
+}
+
+#div_input {
     font-size: 30px;
     line-height: 15vh;
-    padding-left: 3vw;
     background-color: var(--b_color_input_output);
-    color:var(--f_color_body);
+    color: var(--f_color_body);
 }
 
-#div_input_unit{
+#div_input_number {
+    padding-left: 3vw;
+}
+
+#div_input_unit {
     cursor: pointer;
-    float:right;
+    float: right;
     padding-right: 5vw;
 }
 
-#div_toolbar{
+#div_toolbar {
     cursor: pointer;
     font-size: 20px;
-    background-color:var(--b_color_toolbar);
-    color:var(--f_color_body);
+    background-color: var(--b_color_toolbar);
+    color: var(--f_color_body);
     line-height: 12vh;
     padding-left: 3vw;
 }
 
-#div_output{
-    display: grid;
-    width:100vw;
-    grid-template-columns: 75vw 25vw; 
-    grid-template-rows: 15vh;
+#div_output {
     font-size: 30px;
     line-height: 15vh;
-    padding-left: 3vw;
     background-color: var(--b_color_input_output);
-    color:var(--f_color_body);
+    color: var(--f_color_body);
 }
 
-#div_output_unit{
+#div_output_number {
+    padding-left: 3vw;
+}
+
+#div_output_unit {
     cursor: pointer;
-    float:right;
+    float: right;
     padding-right: 5vw;
 }
 
-#div_numeric_pad_grid{
-    /* using simple css-grid for the layout of the grid */
-    display: grid;
-    width:100vw;
-    grid-template-columns: 20vw 20vw 20vw 20vw 20vw; 
-    grid-template-rows: 12vh 12vh 12vh 12vh;
+#div_numeric_pad_layout {
     border-top: 0px;
     border-bottom: 1px;
     border-left: 1px;
@@ -147,112 +149,99 @@ a{
     cursor: pointer;
     text-align: center;
     line-height: 12vh;
-    background-color:var(--b_color_cell);
-    color:var(--f_color_body);
+    background-color: var(--b_color_cell);
+    color: var(--f_color_body);
     border-top: 1px;
     border-bottom: 0px;
     border-left: 0px;
     border-right: 1px;
     border-style: solid;
-    border-color: var(--brd_color_grid);
+    border-color: var(--brd_color_layout);
     font-size: 36px;
 }
 
-.cell_commands{
-    background-color:var(--b_color_cell_commands);
-    color:var(--f_color_body);
+.cell_commands {
+    background-color: var(--b_color_cell_commands);
+    color: var(--f_color_body);
 }
 
 .cell_disabled {
     cursor: auto;
-    pointer-events: none; /* this is not the true property to make element disabled*/
-    background-color:var(--b_color_cell_disabled);
+    pointer-events: none;
+    /* this is not the true property to make element disabled*/
+    background-color: var(--b_color_cell_disabled);
     color: var(--f_color_cell_disabled);
 }
 
+
 /* region: modal window */
-.w3-modal{
-    z-index:3;
-    display:none;
-    padding-top:10vh;
-    position:fixed;
-    left:0;
-    top:0;
-    width:100vw;
-    height:100vh;
-    overflow:auto;
+
+.w3_modal {
+    z-index: 3;
+    display: none;
+    padding-top: 10vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
     /*opacity 70%*/
-    background-color:rgba(0,0,0,0.7)
-    color:var(--f_color_body);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--f_color_body);
 }
 
-.w3-modal-content{
-    margin:auto;
-    background-color:#fff;
-    color:var(--f_color_body);
-    position:relative;
-    padding:5vw;
-    outline:0;
+.w3_modal_content {
+    margin: auto;
+    background-color: #fff;
+    color: var(--f_color_body);
+    position: relative;
+    padding: 5vw;
+    outline: 0;
 }
+
 
 /* endregion: modal window */
 
-.span_button{
+.span_button {
     cursor: pointer;
     border: 1pt;
     border-style: solid;
-    background-color:var(--b_color_toolbar);
-    color:var(--f_color_body);
+    background-color: var(--b_color_toolbar);
+    color: var(--f_color_body);
     padding: 2px;
 }
 
+
 /* endregion: page_main */
+
 
 /* region: page_unit */
 
-.fixed-header, .fixed-footer{
-    width: 100%;
-    position: fixed;
-    height: 9vh;
-}
-.fixed-header{
-    top: 0;
-}
-.fixed-footer{
-    bottom: 0;
+#div_units_header {
+    line-height: 7vh;
+    background-color: var(--b_color_title);
+    color: var(--f_color_title);
 }
 
-#div_units_header{
-    display: grid;
-    width:100vw;
-    height: 9vh;
-    grid-template-columns: 20vw 80vw; 
-    grid-template-rows: 9vh;
-    line-height: 9vh;
-    background-color:var(--b_color_title);
-    color:var(--f_color_title);
-}
-#div_back{
+#div_back {
     font-size: 20px;
-    padding-left: 3vw;
-}
-#div_units_title{
-    font-size: 20px;
+    text-align: left;
     padding-left: 3vw;
 }
 
-#div_units_grid{
-    /* using simple css-grid for the layout of the grid */
-    display: grid;
-    width:100vw;
-    grid-template-rows: 9vh auto;
+#div_units_title {
+    font-size: 20px;
+    text-align: center;
 }
 
-#div_list_grid{
-    display: grid;
-    width:100vw;
-    grid-template-columns: 20vw 50vw 30vw; 
-    grid-template-rows: repeat(auto-fill, 7vh);
+#div_units_base_currency {
+    font-size: 20px;
+    text-align: right;
+    padding-right: 3vw;
+}
+
+#div_list_layout {
     font-size: 30px;
     border-top: 1px;
     border-bottom: 0px;
@@ -260,13 +249,15 @@ a{
     border-right: 0px;
 }
 
+
 /*the list has many rows, instead of id, here I use class*/
-.class_unit{
+
+.class_iso_code {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: left;
     background-color: var(--b_color_input_output);
-    color:var(--f_color_body);
+    color: var(--f_color_body);
     cursor: pointer;
     padding-left: 1vw;
     border-top: 0px;
@@ -275,12 +266,13 @@ a{
     border-right: 0px;
     border-style: solid;
 }
-.class_unit_name{
+
+.class_currency_name {
     text-align: center;
     /* padding for central vertical alignment*/
     padding: 3vh 0;
     background-color: var(--b_color_input_output);
-    color:var(--f_color_body);
+    color: var(--f_color_body);
     font-size: 12px;
     padding-left: 2vw;
     border-top: 0px;
@@ -289,12 +281,13 @@ a{
     border-right: 0px;
     border-style: solid;
 }
-.class_rate{
+
+.class_rate {
     text-align: right;
     /* padding for central vertical alignment*/
     padding: 3vh 0;
     background-color: var(--b_color_input_output);
-    color:var(--f_color_body);
+    color: var(--f_color_body);
     font-size: 18px;
     padding-right: 5vw;
     border-top: 0px;
@@ -303,5 +296,6 @@ a{
     border-right: 0px;
     border-style: solid;
 }
+
 
 /* endregion: page_unit */

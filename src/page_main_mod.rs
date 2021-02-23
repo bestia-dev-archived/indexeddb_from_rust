@@ -12,14 +12,28 @@ use crate::{currdb_config_mod, on_click};
 
 /// fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting
 pub async fn page_main() {
-    // fetch mani_page.html and inject it
+    // fetch page_main.html and inject it
     let resp_body_text = w::fetch_response("pages/page_main.html").await;
     // only the html inside the <body> </body>
     let (html_fragment, _new_pos_cursor) =
         ut::get_delimited_text(&resp_body_text, 0, "<body>", "</body>").unwrap();
     w::set_inner_html("div_for_wasm_html_injecting", &html_fragment);
-    // event handlers
-    // how to delete all old event handlers?
+
+    // region: binding - read from config
+    w::set_text(
+        "div_input_unit",
+        &currdb_config_mod::get_base_currency().await,
+    );
+    w::set_text(
+        "div_output_unit",
+        &currdb_config_mod::get_quote_currency().await,
+    );
+    let rate = "0.6";
+
+    w::set_text("div_toolbar", &rate.to_string());
+    // endregion: binding - read from config
+
+    // region: event handlers
     on_click!("div_1", div_cell_on_click);
     on_click!("div_2", div_cell_on_click);
     on_click!("div_3", div_cell_on_click);
@@ -35,14 +49,16 @@ pub async fn page_main() {
     on_click!("div_backspace", div_backspace_on_click);
     on_click!("div_clear", div_c_on_click);
 
-    on_click!("div_reload", div_reload_on_click);
+    on_click!("div_reload_button", div_reload_button_on_click);
 
     on_click!("div_input_unit", div_input_unit_on_click);
     on_click!("div_output_unit", div_output_unit_on_click);
+    // endregion: event handlers
 }
 
 /// reload json from floatrates.com and save to indexeddb
-pub fn div_reload_on_click(_element_id: &str) {
+pub fn div_reload_button_on_click(_element_id: &str) {
+    w::debug_write("div_reload_button_on_click");
     wasm_bindgen_futures::spawn_local(async {
         let base_currency = currdb_config_mod::get_base_currency().await;
         let v = fetch_and_serde_json(&base_currency).await;
