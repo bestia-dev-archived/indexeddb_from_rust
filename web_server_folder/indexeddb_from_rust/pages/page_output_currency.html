@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>page_output_currency.html</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="https://github.com/LucianoBestia/new_date_time_units_and_formats">
+    <meta name="viewport" content="width = device-width,initial-scale = 1.0" />
+    <link rel="stylesheet" href="../css/indexeddb_from_rust.css">
+</head>
+<!--html and layout-->
+
+<body>
+    <div class="fixed_header" style="height: 7vh;">
+        <div id="div_units_header" style="display: grid;grid-template-columns: 20vw 60vw 20vw; grid-template-rows: 7vh;">
+            <div id="div_back">←</div>
+            <div id="div_units_title">Select output currency</div>
+            <div id="div_units_base_currency">EUR</div>
+        </div>
+    </div>
+    <div id="div_list_layout" style="position: absolute; top:7vh; display: grid;grid-template-columns: 20vw 50vw 30vw; grid-template-rows: repeat(auto-fill, 7vh);">
+        <!--use as template-->
+        <div class="class_iso_code" id="div_unit_row_number_counter">
+            <!--wt_unit-->EUR</div>
+        <div class="class_currency_name">
+            <!--wt_name-->euro</div>
+        <div class="class_rate">
+            <!--wt_rate-->0</div>
+        <!--row-->
+        <!--end use as template-->
+        <!--ignore as template-->
+        <div class="class_iso_code">USD</div>
+        <div class="class_currency_name">dollar</div>
+        <div class="class_rate">0</div>
+
+        <div class="class_iso_code">IRD</div>
+        <div class="class_currency_name">india</div>
+        <div class="class_rate">0</div>
+        <!--end ignore as template-->
+    </div>
+</body>
+
+</html>

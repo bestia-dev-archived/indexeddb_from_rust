@@ -4,6 +4,7 @@
 
 use crate::currdb_mod::{Databases, ObjectStores};
 use crate::idbr_mod as idbr;
+use crate::web_sys_mod as w;
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 use strum::AsStaticRef;
@@ -19,9 +20,15 @@ pub struct ValueStruct {
 
 pub fn to_jsvalue(name: String, rate: f64) -> JsValue {
     let value = ValueStruct { name, rate };
-    let js_value = serde_wasm_bindgen::to_value(&value).unwrap();
+    let jsvalue = serde_wasm_bindgen::to_value(&value).unwrap();
     // return
-    js_value
+    jsvalue
+}
+
+pub fn from_jsvalue(jsvalue: JsValue) -> (String, f64) {
+    let value_struct: ValueStruct = serde_wasm_bindgen::from_value(jsvalue).unwrap();
+    // return
+    (value_struct.name, value_struct.rate)
 }
 
 /// put in ObjectStore
@@ -31,8 +38,8 @@ pub async fn put_inside_object_store(
     name: String,
     rate: f64,
 ) {
-    let js_value = to_jsvalue(name, rate);
-    object_store.put_js_value(iso_code, &js_value);
+    let jsvalue = to_jsvalue(name, rate);
+    object_store.put_jsvalue(iso_code, &jsvalue);
 }
 
 /// put inside transaction
@@ -53,7 +60,7 @@ pub async fn put_inside_database(iso_code: String, name: String, rate: f64) {
     tx.close();
 }
 
-pub async fn fill_currency_store(json_map_string_value: &Map<String, Value>) {
+pub async fn fill_currency_store(base_currency: &str, json_map_string_value: &Map<String, Value>) {
     let db = idbr::Database::use_db(&Databases::Currdb.as_static()).await;
     let tx = db.transaction_open();
     let store = tx.get_object_store_readwrite(&ObjectStores::Currency.as_static());
@@ -63,5 +70,24 @@ pub async fn fill_currency_store(json_map_string_value: &Map<String, Value>) {
         let rate = unwrap!(string_value.1["rate"].as_f64());
         put_inside_object_store(&store, iso_code, name, rate).await;
     }
+    // put also base currency
+    put_inside_object_store(
+        &store,
+        base_currency.to_owned(),
+        base_currency.to_owned(),
+        1.0,
+    )
+    .await;
     tx.close();
+    w::debug_write(&format!("transaction end: {}", ""));
+}
+
+pub async fn get_rate(iso_code: &str) -> f64 {
+    let db = idbr::Database::use_db(&Databases::Currdb.as_static()).await;
+    let jsvalue = db
+        .get_jsvalue(ObjectStores::Currency.as_static(), iso_code)
+        .await;
+    let (_name, rate) = from_jsvalue(jsvalue);
+    // return
+    rate
 }

@@ -23,17 +23,30 @@ extern "C" {
     #[wasm_bindgen(catch)]
     pub(crate) async fn put_key_value(db_name: &str, store_name: &str, key: &str, value: &str, ) -> Result<(), JsValue>;
     pub(crate) async fn get_key_value(db_name: &str, store_name: &str, key: &str, ) -> JsValue;
-    pub(crate) fn transaction_open(db:&JsValue) ->JsValue;
-    pub(crate) fn create_object_store(db:JsValue,store_name:&str);
-    pub(crate) fn get_object_store_from_transaction_versionchange(tx:&JsValue,store_name:&str) -> JsValue;
-    pub(crate) fn get_object_store_from_transaction_readwrite(tx:&JsValue,store_name:&str) -> JsValue;
-    pub(crate) fn transaction_object_store_put(tx_ob_st: JsValue, key:&str, value:&str);
-    pub(crate) fn transaction_object_store_put_js_value(tx_ob_st: JsValue, key:&str, value:&JsValue);
+    
+    // region: db
     #[wasm_bindgen(catch)]
     pub(crate) async fn db_put_key_value(db:&JsValue, store_name:&str, key:&str, value:&str) -> Result<(), JsValue>;
-    pub(crate) fn transaction_close(tx:&JsValue);
+    pub(crate) async fn db_get_jsvalue(db:&JsValue, store_name: &str, key: &str, ) -> JsValue;
     pub(crate) async fn cursor(db:&JsValue, store_name:&str)->JsValue;
+    pub(crate) fn transaction_open(db:&JsValue) ->JsValue;
+    pub(crate) fn create_object_store(db:JsValue,store_name:&str);
+    // endregion: db
+    
+    // region: transaction
+    pub(crate) fn get_object_store_from_transaction_versionchange(tx:&JsValue,store_name:&str) -> JsValue;
+    pub(crate) fn get_object_store_from_transaction_readwrite(tx:&JsValue,store_name:&str) -> JsValue;
+    pub(crate) fn transaction_close(tx:&JsValue);
+    // endregion: transaction
+
+    // region: object store
+    pub(crate) fn transaction_object_store_put(tx_ob_st: JsValue, key:&str, value:&str);
+    pub(crate) fn transaction_object_store_put_jsvalue(tx_ob_st: JsValue, key:&str, value:&JsValue);
+    // endregion: object store
+
+    // region: cursor
     pub(crate) async fn cursor_continue(cursor:&JsValue)->JsValue;
     pub(crate) fn cursor_key(cursor:&JsValue)->JsValue;
     pub(crate) fn cursor_value(cursor:&JsValue)->JsValue;
+    // endregion: cursor
 }

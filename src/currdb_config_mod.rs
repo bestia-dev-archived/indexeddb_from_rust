@@ -94,3 +94,25 @@ pub async fn get_date_fetch() -> String {
     // return
     value
 }
+
+pub async fn set_input_number(input_number: &str) {
+    idb::put_key_value(
+        Databases::Currdb.as_static(),
+        &ObjectStores::Config.as_static(),
+        "input_number",
+        input_number,
+    )
+    .await
+    .unwrap();
+}
+
+pub async fn get_input_number() -> String {
+    let value = idb::get_key_value(
+        Databases::Currdb.as_static(),
+        &ObjectStores::Config.as_static(),
+        "input_number",
+    )
+    .await;
+    // return
+    value
+}

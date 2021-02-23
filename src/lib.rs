@@ -9,10 +9,12 @@ mod currdb_currency_mod;
 mod currdb_mod;
 mod idbr_imports_mod;
 mod idbr_mod;
+mod page_input_currency_mod;
 mod page_main_mod;
-mod page_units_mod;
+mod page_output_currency_mod;
 mod utils_mod;
 mod web_sys_mod;
+use wasm_bindgen_futures::spawn_local;
 
 use crate::web_sys_mod as w;
 
@@ -29,7 +31,7 @@ pub fn wasm_bindgen_start() -> Result<(), JsValue> {
     crate::idbr_mod::check_browser_capability();
 
     //async block
-    wasm_bindgen_futures::spawn_local(async {
+    spawn_local(async {
         crate::currdb_mod::init_upgrade_currdb().await;
         crate::page_main_mod::page_main().await;
     });

@@ -1,4 +1,4 @@
-// page_units_mod.rs
+// page_output_currency_mod.rs
 
 //use std::ops::Index;
 
@@ -7,6 +7,7 @@ use wasm_bindgen::prelude::*;
 //use wasm_bindgen::{JsCast, JsValue};
 //use serde_json::Value;
 use wasm_bindgen::JsCast;
+use wasm_bindgen_futures::spawn_local;
 
 use crate::currdb_currency_mod::*;
 use crate::web_sys_mod as w;
@@ -17,9 +18,9 @@ use crate::row_on_click;
 use crate::utils_mod as ut;
 
 /// fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting
-pub async fn page_units() {
+pub async fn page_output_currency() {
     // fetch page_unit.html and inject it
-    let resp_body_text = w::fetch_response("pages/page_units.html").await;
+    let resp_body_text = w::fetch_response("pages/page_output_currency.html").await;
     // only the html inside the <body> </body>
     let (html_fragment, _new_pos_cursor) = unwrap!(ut::get_delimited_text(
         &resp_body_text,
@@ -108,7 +109,7 @@ pub async fn page_units() {
 
 /// go back to page_main
 pub fn div_back_on_click(_element_id: &str) {
-    wasm_bindgen_futures::spawn_local(async {
+    spawn_local(async {
         crate::page_main_mod::page_main().await;
     });
 }
@@ -116,12 +117,14 @@ pub fn div_back_on_click(_element_id: &str) {
 /// unit is a field in the row of the list
 pub fn unit_on_click(element_prefix: &str, row_number: usize) {
     let element_id = format!("{}{}", element_prefix, row_number);
-    w::debug_write(&format!("element_id: {}", element_id));
-    let iso_code = w::get_text(&element_id);
-    wasm_bindgen_futures::spawn_local(async move {
+    spawn_local(async move {
+        w::debug_write(&format!("element_id: {}", element_id));
+        let iso_code = w::get_text(&element_id);
         let iso_code = iso_code.clone();
-        crate::currdb_config_mod::set_base_currency(&iso_code).await;
+        crate::currdb_config_mod::set_quote_currency(&iso_code).await;
+        // find the new rate
+        let rate = crate::currdb_currency_mod::get_rate(&iso_code).await;
+        crate::currdb_config_mod::set_rate(&rate.to_string()).await;
+        div_back_on_click("");
     });
-    // read exchange rate for new base currency
-    crate::page_main_mod::div_reload_button_on_click("");
 }

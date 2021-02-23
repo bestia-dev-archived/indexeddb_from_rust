@@ -31,6 +31,12 @@ export async function init_upgrade_db(db_name:string, version:number, rust_closu
     return db;
 }
 
+/// get key-value in a store 
+export async function db_get_jsvalue(db:idb.IDBPDatabase, store:string, key:string){
+    const value = await db.get(store, key);
+    return value;
+}
+
 /// create object store
 export async function create_object_store(db:idb.IDBPDatabase,store_name:string) {
     db.createObjectStore(store_name);
@@ -54,7 +60,7 @@ export function transaction_object_store_put(tx_ob_st: any, key:string, value:st
 }
 
 // put inside a transaction_object_store
-export function transaction_object_store_put_js_value(tx_ob_st: any, key:string, value:any) {
+export function transaction_object_store_put_jsvalue(tx_ob_st: any, key:string, value:any) {
     tx_ob_st.put(value,key);
 }
 

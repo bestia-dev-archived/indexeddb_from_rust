@@ -5,6 +5,7 @@ use wasm_bindgen::prelude::*;
 //use wasm_bindgen::{JsCast, JsValue};
 use serde_json::Value;
 use wasm_bindgen::JsCast;
+use wasm_bindgen_futures::spawn_local;
 
 use crate::utils_mod as ut;
 use crate::web_sys_mod as w;
@@ -21,16 +22,20 @@ pub async fn page_main() {
 
     // region: binding - read from config
     w::set_text(
+        "div_input_number",
+        &currdb_config_mod::get_input_number().await,
+    );
+    w::set_text(
         "div_input_unit",
         &currdb_config_mod::get_base_currency().await,
     );
+    w::set_text("div_toolbar", &currdb_config_mod::get_rate().await);
     w::set_text(
         "div_output_unit",
         &currdb_config_mod::get_quote_currency().await,
     );
-    let rate = "0.6";
 
-    w::set_text("div_toolbar", &rate.to_string());
+    convert();
     // endregion: binding - read from config
 
     // region: event handlers
@@ -59,15 +64,17 @@ pub async fn page_main() {
 /// reload json from floatrates.com and save to indexeddb
 pub fn div_reload_button_on_click(_element_id: &str) {
     w::debug_write("div_reload_button_on_click");
-    wasm_bindgen_futures::spawn_local(async {
+    spawn_local(async {
         let base_currency = currdb_config_mod::get_base_currency().await;
+        w::debug_write(&base_currency);
         let v = fetch_and_serde_json(&base_currency).await;
         let json_map_string_value = unwrap!(v.as_object());
-        crate::currdb_currency_mod::fill_currency_store(json_map_string_value).await;
+        crate::currdb_currency_mod::fill_currency_store(&base_currency, json_map_string_value)
+            .await;
     });
 }
 
-async fn fetch_and_serde_json(base_currency: &str) -> Value {
+pub async fn fetch_and_serde_json(base_currency: &str) -> Value {
     let url = format!(
         "http://www.floatrates.com/daily/{}.json",
         base_currency.to_lowercase()
@@ -138,22 +145,25 @@ pub fn div_c_on_click(_element_id: &str) {
 /// convert Currency with exchange rates
 /// input cannot never be incorrect f64
 fn convert() {
+    spawn_local(async {
+        currdb_config_mod::set_input_number(&w::get_text("div_input_number")).await;
+    });
     let rate = w::get_text("div_toolbar").parse::<f64>().unwrap();
     let input = w::get_text("div_input_number").parse::<f64>().unwrap();
     let output = format!("{:.3}", input * rate);
     w::set_text("div_output_number", &output);
 }
 
-/// opens the page_units
+/// opens the page_input_currency
 fn div_input_unit_on_click(_element_id: &str) {
-    wasm_bindgen_futures::spawn_local(async {
-        crate::page_units_mod::page_units().await;
+    spawn_local(async {
+        crate::page_input_currency_mod::page_input_currency().await;
     });
 }
 
-/// opens the page_units
+/// opens the page_input_currency
 fn div_output_unit_on_click(_element_id: &str) {
-    wasm_bindgen_futures::spawn_local(async {
-        crate::page_units_mod::page_units().await;
+    spawn_local(async {
+        crate::page_output_currency_mod::page_output_currency().await;
     });
 }

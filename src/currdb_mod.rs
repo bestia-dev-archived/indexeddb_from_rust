@@ -73,9 +73,10 @@ fn upgrade_from_v01_to_v02(db: &idb::Database, tx: &idb::Transaction) {
     config_object_store.put("quote_currency", "USD");
     config_object_store.put("rate", "1.21");
     config_object_store.put("date_fetch", "none");
+    config_object_store.put("input_number", "0");
 
     let currency_object_store =
         tx.get_object_store_versionchange(&ObjectStores::Currency.as_static());
-    let js_value = crate::currdb_currency_mod::to_jsvalue("U.S. Dollar".to_owned(), 0.782);
-    currency_object_store.put_js_value("USD".to_owned(), &js_value);
+    let jsvalue = crate::currdb_currency_mod::to_jsvalue("U.S. Dollar".to_owned(), 0.782);
+    currency_object_store.put_jsvalue("USD".to_owned(), &jsvalue);
 }
