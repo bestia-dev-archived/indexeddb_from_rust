@@ -1,8 +1,7 @@
 {
-    "short_name": "clock",
-    "name": "indexeddb_from_rust",
-    "icons": [
-        {
+    "short_name": "currency converter",
+    "name": "currency converter",
+    "icons": [{
             "src": "icons/android-icon-36x36.png",
             "sizes": "36x36",
             "type": "image/png",

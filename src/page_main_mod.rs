@@ -76,7 +76,7 @@ pub fn div_reload_button_on_click(_element_id: &str) {
 
 pub async fn fetch_and_serde_json(base_currency: &str) -> Value {
     let url = format!(
-        "http://www.floatrates.com/daily/{}.json",
+        "https://www.floatrates.com/daily/{}.json",
         base_currency.to_lowercase()
     );
     let resp_body_text = w::fetch_response(&url).await;
