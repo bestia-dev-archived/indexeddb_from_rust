@@ -11,9 +11,11 @@ mod idbr_imports_mod;
 mod idbr_mod;
 mod page_input_currency_mod;
 mod page_main_mod;
+mod page_modal_about_mod;
 mod page_output_currency_mod;
 mod utils_mod;
 mod web_sys_mod;
+
 use wasm_bindgen_futures::spawn_local;
 
 use crate::web_sys_mod as w;

@@ -45,7 +45,7 @@ dependencies = [
 
 [[package]]
 name = "indexeddb_from_rust"
-version = "2021.223.1138"
+version = "2021.418.1035"
 dependencies = [
  "console_error_panic_hook",
  "js-sys",

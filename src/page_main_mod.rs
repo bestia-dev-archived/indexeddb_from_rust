@@ -7,9 +7,9 @@ use serde_json::Value;
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 
+use crate::on_click;
 use crate::utils_mod as ut;
 use crate::web_sys_mod as w;
-use crate::{currdb_config_mod, on_click};
 
 /// fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting
 pub async fn page_main() {
@@ -23,16 +23,16 @@ pub async fn page_main() {
     // region: binding - read from config
     w::set_text(
         "div_input_number",
-        &currdb_config_mod::get_input_number().await,
+        &crate::currdb_config_mod::get_input_number().await,
     );
     w::set_text(
         "div_input_unit",
-        &currdb_config_mod::get_base_currency().await,
+        &crate::currdb_config_mod::get_base_currency().await,
     );
-    w::set_text("div_toolbar", &currdb_config_mod::get_rate().await);
+    w::set_text("div_toolbar", &crate::currdb_config_mod::get_rate().await);
     w::set_text(
         "div_output_unit",
-        &currdb_config_mod::get_quote_currency().await,
+        &crate::currdb_config_mod::get_quote_currency().await,
     );
 
     convert();
@@ -58,6 +58,8 @@ pub async fn page_main() {
 
     on_click!("div_input_unit", div_input_unit_on_click);
     on_click!("div_output_unit", div_output_unit_on_click);
+
+    on_click!("div_hamburger_button", div_hamburger_button_on_click);
     // endregion: event handlers
 }
 
@@ -65,7 +67,7 @@ pub async fn page_main() {
 pub fn div_reload_button_on_click(_element_id: &str) {
     w::debug_write("div_reload_button_on_click");
     spawn_local(async {
-        let base_currency = currdb_config_mod::get_base_currency().await;
+        let base_currency = crate::currdb_config_mod::get_base_currency().await;
         w::debug_write(&base_currency);
         let v = fetch_and_serde_json(&base_currency).await;
         let json_map_string_value = unwrap!(v.as_object());
@@ -146,7 +148,7 @@ pub fn div_c_on_click(_element_id: &str) {
 /// input cannot never be incorrect f64
 fn convert() {
     spawn_local(async {
-        currdb_config_mod::set_input_number(&w::get_text("div_input_number")).await;
+        crate::currdb_config_mod::set_input_number(&w::get_text("div_input_number")).await;
     });
     let rate = w::get_text("div_toolbar").parse::<f64>().unwrap();
     let input = w::get_text("div_input_number").parse::<f64>().unwrap();
@@ -165,5 +167,12 @@ fn div_input_unit_on_click(_element_id: &str) {
 fn div_output_unit_on_click(_element_id: &str) {
     spawn_local(async {
         crate::page_output_currency_mod::page_output_currency().await;
+    });
+}
+
+/// opens the page_input_currency
+fn div_hamburger_button_on_click(_element_id: &str) {
+    spawn_local(async {
+        crate::page_modal_about_mod::page_modal_about().await;
     });
 }

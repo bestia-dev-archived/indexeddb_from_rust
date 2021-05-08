@@ -1,6 +1,6 @@
 [package]
 name = "indexeddb_from_rust"
-version = "2021.223.1138"
+version = "2021.418.1035"
 authors = ["Luciano Bestia <Luciano.Bestia@gmail.com>"]
 edition = "2018"
 description = "experimenting with indexeddb in rust wasm PWA"

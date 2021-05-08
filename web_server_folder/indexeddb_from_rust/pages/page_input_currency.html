@@ -11,14 +11,15 @@
 <!--html and layout-->
 
 <body>
-    <div class="fixed_header" style="height: 7vh;">
-        <div id="div_units_header" style="display: grid;grid-template-columns: 20vw 60vw 20vw; grid-template-rows: 7vh;">
+    <div class="fixed_header" class="app_width" style="height: 7vh;">
+        <div id="div_units_header" class="app_width" style="display: grid;grid-template-columns: 10vw 65vw 10vw 15vw; grid-template-rows: 7vh;">
             <div id="div_back">←</div>
             <div id="div_units_title">Select input currency</div>
+            <div id="div_reload_button">↻</div>
             <div id="div_units_base_currency">EUR</div>
         </div>
     </div>
-    <div id="div_list_layout" style="position: absolute; top:7vh; display: grid;grid-template-columns: 20vw 50vw 30vw; grid-template-rows: repeat(auto-fill, 7vh);">
+    <div id="div_list_layout" class="app_width" style="position: absolute; top:7vh; display: grid;grid-template-columns: 20vw 50vw 30vw; grid-template-rows: repeat(auto-fill, 7vh);">
         <!--use as template-->
         <div class="class_iso_code" id="div_unit_row_number_counter">
             <!--wt_unit-->EUR</div>

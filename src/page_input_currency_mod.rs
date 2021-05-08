@@ -10,10 +10,9 @@ use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 
 use crate::currdb_currency_mod::*;
-use crate::web_sys_mod as w;
-//use crate::currdb_config_mod;
 use crate::on_click;
 use crate::row_on_click;
+use crate::web_sys_mod as w;
 //use crate::idbr_mod;
 use crate::utils_mod as ut;
 
@@ -99,6 +98,7 @@ pub async fn page_input_currency() {
 
     // region: event handlers
     on_click!("div_back", div_back_on_click);
+    on_click!("div_reload_button", div_reload_button_on_click);
 
     // handler for every row
     for i in 0..=row_number_counter {
@@ -122,7 +122,7 @@ pub fn unit_on_click(element_prefix: &str, row_number: usize) {
         let base_currency = base_currency.clone();
         w::debug_write(&format!("input base_currency: {}", &base_currency));
         crate::currdb_config_mod::set_base_currency(&base_currency).await;
-        // read exchange rate for new base currency 8div_reload_button_on_click)
+        // read exchange rate for new base currency div_reload_button_on_click)
         let v = crate::page_main_mod::fetch_and_serde_json(&base_currency).await;
         let json_map_string_value = unwrap!(v.as_object());
         crate::currdb_currency_mod::fill_currency_store(&base_currency, json_map_string_value)
@@ -134,5 +134,19 @@ pub fn unit_on_click(element_prefix: &str, row_number: usize) {
         w::debug_write(&format!("rate: {}", rate));
         crate::currdb_config_mod::set_rate(&rate.to_string()).await;
         div_back_on_click("");
+    });
+}
+
+/// reload json from floatrates.com and save to indexeddb
+pub fn div_reload_button_on_click(_element_id: &str) {
+    w::debug_write("div_reload_button_on_click");
+    spawn_local(async {
+        let base_currency = crate::currdb_config_mod::get_base_currency().await;
+        w::debug_write(&base_currency);
+        let v = crate::page_main_mod::fetch_and_serde_json(&base_currency).await;
+        let json_map_string_value = unwrap!(v.as_object());
+        crate::currdb_currency_mod::fill_currency_store(&base_currency, json_map_string_value)
+            .await;
+        page_input_currency();
     });
 }

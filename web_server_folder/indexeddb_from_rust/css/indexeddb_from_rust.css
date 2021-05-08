@@ -19,6 +19,10 @@
     --brd_color_layout: #82AE4D;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 
 /* disable double-tap for zooming */
 
@@ -38,12 +42,17 @@ html {
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 }
 
 a {
     cursor: pointer;
+}
+
+.app_width {
+    /* the proportion of the app windows is around 16:9 */
+    width: min(calc(100vh*9/16), 100vh);
 }
 
 
@@ -52,6 +61,7 @@ a {
 .fixed_header,
 .fixed_footer {
     position: fixed;
+    width: 100%;
 }
 
 .fixed_header {
@@ -178,13 +188,13 @@ the grid-template-columns and grid-template-rows are defined in the html*/
 
 .w3_modal {
     z-index: 3;
-    display: none;
+    display: block;
     padding-top: 10vh;
     position: fixed;
     left: 0;
     top: 0;
-    width: 100vw;
     height: 100vh;
+    width: 100%;
     overflow: auto;
     /*opacity 70%*/
     background-color: rgba(0, 0, 0, 0.7);

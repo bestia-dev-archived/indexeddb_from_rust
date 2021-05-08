@@ -5,14 +5,14 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.223.1138  date: 2021-02-23 authors: Luciano Bestia***  
+***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.418.1035  date: 2021-04-18 authors: Luciano Bestia***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1020-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-70-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-142-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1065-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-151-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
 
@@ -26,10 +26,22 @@ Indexeddb is the standard database storage inside the browser. It is not Sql. It
 It is more or less a key-value storage, but the value can be a javascript object and that can be complex.  
 The api is in javascript, uses old fashioned callbacks and events, completely async, without async/await or Promises.  
 How to use it efficiently from rust? This is the question.  
+In this project I only experiment with indexeddb. In my next project <https://github.com/LucianoBestia/pwa_currency_converter> I actually use this findings for something useful.  
 
-## F12 developer tools
+## Development
 
-It is easy to see the content of indexeddb in F12. Very convenient.  
+In Visual Studio Code press `ctrl+j` to open the Terminal window. Use `cargo make` to see the prepared steps for deployment like:  
+`$ cargo make release`  
+And then follow the instructions on the screen like:  
+
+- Run the web server in a separate terminal: cd ~/rustprojects/indexeddb_from_rust/web_server_folder/;basic-http-server  
+- Run the web app in your browser: <http://127.0.0.1:4000/indexeddb_from_rust/>  
+
+Oh, today I did everything right, but the browser said "This site can't be reached". After many attempts I discovered, that WSL2 `localhost` or `127.0.0.1` connection to Win10 is broken after putting the laptop to sleep. I have to restart the WSL in PowerShell Run as administrator with  
+`Get-Service LxssManager | Restart-Service`.  
+Not nice and very difficult to discover because WSL2 is running just fine, except this.  
+
+In the browser (chrome, edge, firefox) use F12 developer tools to easily see the content of indexeddb in F12. Very convenient.  
 
 ## plantuml diagrams
 

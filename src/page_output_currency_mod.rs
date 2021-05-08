@@ -10,10 +10,9 @@ use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 
 use crate::currdb_currency_mod::*;
-use crate::web_sys_mod as w;
-//use crate::currdb_config_mod;
 use crate::on_click;
 use crate::row_on_click;
+use crate::web_sys_mod as w;
 //use crate::idbr_mod;
 use crate::utils_mod as ut;
 
