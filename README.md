@@ -5,7 +5,7 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***[repo](https://github.com/LucianoBestia/indexeddb_from_rust); version: 2021.418.1035  date: 2021-04-18 authors: Luciano Bestia***  
+***version: 2021.418.1035  date: 2021-04-18 author: [dev_Bestia](https://bestia.dev) repository: [GitHub](https://github.com/LucianoBestia/indexeddb_from_rust)***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
