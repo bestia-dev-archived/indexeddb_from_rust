@@ -45,6 +45,8 @@ In the browser (chrome, edge, firefox) use F12 developer tools to easily see the
 
 ## plantuml diagrams
 
+Update 2022: I now try to use `mermaid` instead of plantuml, because it is integrated in the Github markdown.
+
 I will give a try to make diagrams for documentation with `plantuml`. Diagrams are defined using a simple and intuitive language.  
 It follows the philosophy "everything as code". So it can be easily embedded in the code or documentation.  
 The diagram can be created online on <http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80>  
