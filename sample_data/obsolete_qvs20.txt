@@ -1,6 +1,6 @@
 // The indexeddb store `Currency` has a key: Currency iso_code
 // and a string value. The Value string is in simple qvs20 format to accommodate more data fields.
-// <https://github.com/LucianoBestia/QVS20>
+// <https://github.com/bestia-dev/QVS20>
 // It is so simple, that the serialization can be done "manually".
 // I know 100% for sure there cannot be 4 special characters that must be escaped: [, ], LF, \
 // Value has 2 fields: name:string and rate:decimal

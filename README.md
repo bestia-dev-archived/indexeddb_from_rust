@@ -5,20 +5,20 @@
 [comment]: # (lmake_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***version: 2021.418.1035  date: 2021-04-18 author: [dev_Bestia](https://bestia.dev) repository: [GitHub](https://github.com/LucianoBestia/indexeddb_from_rust)***  
+***version: 2021.418.1035  date: 2021-04-18 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/indexeddb_from_rust)***  
 
 [comment]: # (lmake_cargo_toml_to_md end)
 
 [comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1065-green.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-151-purple.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
-[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1065-green.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-151-purple.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 
 [comment]: # (lmake_lines_of_code end)
 
-[![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/blob/master/LICENSE) [![Rust](https://github.com/LucianoBestia/indexeddb_from_rust/workflows/RustAction/badge.svg)](https://github.com/LucianoBestia/indexeddb_from_rust/)
+[![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/blob/master/LICENSE) [![Rust](https://github.com/bestia-dev/indexeddb_from_rust/workflows/RustAction/badge.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 
 ## experimenting
 
@@ -26,7 +26,7 @@ Indexeddb is the standard database storage inside the browser. It is not Sql. It
 It is more or less a key-value storage, but the value can be a javascript object and that can be complex.  
 The api is in javascript, uses old fashioned callbacks and events, completely async, without async/await or Promises.  
 How to use it efficiently from rust? This is the question.  
-In this project I only experiment with indexeddb. In my next project <https://github.com/LucianoBestia/pwa_currency_converter> I actually use this findings for something useful.  
+In this project I only experiment with indexeddb. In my next project <https://github.com/bestia-dev/pwa_currency_converter> I actually use this findings for something useful.  
 
 ## Development
 
