@@ -80,7 +80,7 @@ I will make a typescript/javascript module to export functions from `idb`. Then 
 The rust library `idbr` will use the imported functions and create rust objects/structs and methods/functions.  
 My rust code will then use only the `idbr` crate and hopefully there will be no more JsValue or other javascript peculiarities.
 
-![idbrDiagram](images/idbrDiagram.svg)
+![idbrDiagram](https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/idbrDiagram.svg)
 
 ## Typescript adventure
 

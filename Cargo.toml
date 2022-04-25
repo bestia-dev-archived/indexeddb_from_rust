@@ -1,7 +1,7 @@
 [package]
 name = "indexeddb_from_rust"
 version = "2021.418.1035"
-authors = ["bestia.dev <info@bestia.dev>"]
+authors = ["bestia.dev"]
 edition = "2018"
 description = "experimenting with indexeddb in rust wasm PWA"
 repository = "https://github.com/bestia-dev/indexeddb_from_rust"

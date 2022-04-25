@@ -1,15 +1,25 @@
 {
     "cSpell.words": [
-        "IDBP",
+        "bindgen",
         "currdb",
         "floatrates",
         "idbjs",
+        "IDBP",
         "idbr",
         "idbx",
         "idxdb",
+        "indexeddb",
+        "Lxss",
         "nodesource",
         "osit",
+        "plantuml",
         "readwrite",
+        "rustc",
+        "rustfmt",
+        "rustprojects",
+        "serde",
+        "startuml",
+        "structs",
         "transpilation"
     ]
 }
