@@ -49,14 +49,24 @@ In the browser (chrome, edge, firefox) use F12 developer tools to easily see the
 
 ## plantuml diagrams
 
-Update 2022: I now try to use `mermaid` instead of plantuml, because it is integrated in the Github markdown.
-
 I will give a try to make diagrams for documentation with `plantuml`. Diagrams are defined using a simple and intuitive language.  
 It follows the philosophy "everything as code". So it can be easily embedded in the code or documentation.  
 The diagram can be created online on <http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80>  
 Then it can be exported as svg and included as an image.  
-<details>
-  <summary>plantuml example</summary>
+The cargo-auto contains the automation task to create the svg image and embed it inside the README.md adding the markers.
+
+
+
+## indexeddb, idb, idbr
+
+The original api for `indexeddb`is too hard and very old-fashioned without async/await.  
+I will use the [idb](https://github.com/jakearchibald/idb) javascript library that makes `indexeddb` easier to use.
+Javascript has changed over time. Javascript is now in ES2020 edition.  
+I will make a typescript/javascript module to export functions from `idb`. Then one rust module to import functions from idb_export.
+The rust library `idbr` will use the imported functions and create rust objects/structs and methods/functions.  
+My rust code will then use only the `idbr` crate and hopefully there will be no more JsValue or other javascript peculiarities.
+
+[comment]: # (auto_plantuml start)
 
 ```plantuml
 @startuml
@@ -71,20 +81,11 @@ note right of (idbr): rust library for indexeddb
 note right of (idb): javascript library with async/await\nfrom jakearchibald
 note right of (indexeddb): supported by all major browsers\nbut no support for async/await
 @enduml
-  ```
+```
 
-</details>
+![svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q](https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q.svg)
 
-## indexeddb, idb, idbr
-
-The original api for `indexeddb`is too hard and very old-fashioned without async/await.  
-I will use the [idb](https://github.com/jakearchibald/idb) javascript library that makes `indexeddb` easier to use.
-Javascript has changed over time. Javascript is now in ES2020 edition.  
-I will make a typescript/javascript module to export functions from `idb`. Then one rust module to import functions from idb_export.
-The rust library `idbr` will use the imported functions and create rust objects/structs and methods/functions.  
-My rust code will then use only the `idbr` crate and hopefully there will be no more JsValue or other javascript peculiarities.
-
-![idbrDiagram](https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/idbrDiagram.svg)
+[comment]: # (auto_plantuml end)
 
 ## Typescript adventure
 

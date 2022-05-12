@@ -4,7 +4,7 @@
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../indexeddb_from_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"><a href="#">Crate indexeddb_from_rust</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 2022.512.814</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#functions">Functions</a></li></ul></div></section><div id="sidebar-vars" data-name="indexeddb_from_rust" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../indexeddb_from_rust/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">indexeddb_from_rust</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/indexeddb_from_rust/lib.rs.html#4-289">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="indexeddb_from_rust"><a href="#indexeddb_from_rust">indexeddb_from_rust</a></h2>
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">indexeddb_from_rust</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/indexeddb_from_rust/lib.rs.html#4-286">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="indexeddb_from_rust"><a href="#indexeddb_from_rust">indexeddb_from_rust</a></h2>
 <p><strong>experimenting with indexeddb in rust wasm PWA</strong><br />
 <em><strong>version: 2022.512.814 date: 2022-05-12 author: <a href="https://bestia.dev">bestia.dev</a> repository: <a href="https://github.com/bestia-dev/indexeddb_from_rust">Github</a></strong></em></p>
 <p><a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://img.shields.io/badge/Lines_in_Rust-1067-green.svg" alt="Lines in Rust code" /></a>
@@ -35,13 +35,11 @@ And then follow the instructions on the screen like:</p>
 Not nice and very difficult to discover because WSL2 is running just fine, except this.</p>
 <p>In the browser (chrome, edge, firefox) use F12 developer tools to easily see the content of indexeddb in F12. Very convenient.</p>
 <h3 id="plantuml-diagrams"><a href="#plantuml-diagrams">plantuml diagrams</a></h3>
-<p>Update 2022: I now try to use <code>mermaid</code> instead of plantuml, because it is integrated in the Github markdown.</p>
 <p>I will give a try to make diagrams for documentation with <code>plantuml</code>. Diagrams are defined using a simple and intuitive language.<br />
 It follows the philosophy “everything as code”. So it can be easily embedded in the code or documentation.<br />
 The diagram can be created online on <a href="http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80">http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80</a><br />
-Then it can be exported as svg and included as an image.</p>
-<details>
-  <summary>plantuml example</summary>
+Then it can be exported as svg and included as an image.<br />
+The cargo-auto contains the automation task to create the svg image and embed it inside the README.md adding the markers.</p>
 <div class="example-wrap"><pre class="language-plantuml"><code>@startuml
 [rust code] ..&gt; [idbr]
 [idbr] ..&gt; [idbr_imports]
@@ -53,7 +51,8 @@ note right of (rust code): with async/await without jsValue
 note right of (idbr): rust library for indexeddb
 note right of (idb): javascript library with async/await\nfrom jakearchibald
 note right of (indexeddb): supported by all major browsers\nbut no support for async/await
-@enduml</code></pre></div></details>
+@enduml</code></pre></div>
+<p><img src="https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q.svg" alt="svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q" /></p>
 <h3 id="indexeddb-idb-idbr"><a href="#indexeddb-idb-idbr">indexeddb, idb, idbr</a></h3>
 <p>The original api for <code>indexeddb</code>is too hard and very old-fashioned without async/await.<br />
 I will use the <a href="https://github.com/jakearchibald/idb">idb</a> javascript library that makes <code>indexeddb</code> easier to use.

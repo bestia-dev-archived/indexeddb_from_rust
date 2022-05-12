@@ -43,14 +43,11 @@
 //!
 //! ## plantuml diagrams
 //!
-//! Update 2022: I now try to use `mermaid` instead of plantuml, because it is integrated in the Github markdown.
-//!
 //! I will give a try to make diagrams for documentation with `plantuml`. Diagrams are defined using a simple and intuitive language.  
 //! It follows the philosophy "everything as code". So it can be easily embedded in the code or documentation.  
 //! The diagram can be created online on <http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80>  
 //! Then it can be exported as svg and included as an image.  
-//! <details>
-//!   <summary>plantuml example</summary>
+//! The cargo-auto contains the automation task to create the svg image and embed it inside the README.md adding the markers.
 //!
 //! ```plantuml
 //! @startuml
@@ -65,9 +62,9 @@
 //! note right of (idb): javascript library with async/await\nfrom jakearchibald
 //! note right of (indexeddb): supported by all major browsers\nbut no support for async/await
 //! @enduml
-//!   ```
+//! ```
 //!
-//! </details>
+//! ![svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q](https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q.svg)
 //!
 //! ## indexeddb, idb, idbr
 //!
