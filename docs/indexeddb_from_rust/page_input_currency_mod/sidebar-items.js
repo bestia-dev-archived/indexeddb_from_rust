@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["div_back_on_click","go back to page_main"],["div_reload_button_on_click","reload json from floatrates.com and save to indexeddb"],["page_input_currency","fetch and inject HTML fragment into index.html/div_for_wasm_html_injecting"],["unit_on_click","unit is a field in the row of the list"]]});

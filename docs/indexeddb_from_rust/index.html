@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="indexeddb_from_rust"><meta name="keywords" content="rust, rustlang, rust-lang, indexeddb_from_rust"><title>indexeddb_from_rust - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../indexeddb_from_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../indexeddb_from_rust/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate indexeddb_from_rust</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 2022.512.814</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#functions">Functions</a></li></ul></div></section><div id="sidebar-vars" data-name="indexeddb_from_rust" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../indexeddb_from_rust/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">indexeddb_from_rust</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/indexeddb_from_rust/lib.rs.html#4-289">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="indexeddb_from_rust"><a href="#indexeddb_from_rust">indexeddb_from_rust</a></h2>
+<p><strong>experimenting with indexeddb in rust wasm PWA</strong><br />
+<em><strong>version: 2022.512.814 date: 2022-05-12 author: <a href="https://bestia.dev">bestia.dev</a> repository: <a href="https://github.com/bestia-dev/indexeddb_from_rust">Github</a></strong></em></p>
+<p><a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://img.shields.io/badge/Lines_in_Rust-1067-green.svg" alt="Lines in Rust code" /></a>
+<a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://img.shields.io/badge/Lines_in_Doc_comments-318-blue.svg" alt="Lines in Doc comments" /></a>
+<a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://img.shields.io/badge/Lines_in_comments-153-purple.svg" alt="Lines in Comments" /></a>
+<a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://img.shields.io/badge/Lines_in_examples-0-yellow.svg" alt="Lines in examples" /></a>
+<a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://img.shields.io/badge/Lines_in_tests-0-orange.svg" alt="Lines in tests" /></a></p>
+<p><a href="https://github.com/bestia-dev/indexeddb_from_rust/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" /></a>
+<a href="https://github.com/bestia-dev/indexeddb_from_rust/"><img src="https://github.com/bestia-dev/indexeddb_from_rust/workflows/RustAction/badge.svg" alt="Rust" /></a>
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fbestia-dev%2Findexeddb_from_rust&amp;count_bg=%2379C83D&amp;title_bg=%23555555&amp;icon=&amp;icon_color=%23E7E7E7&amp;title=hits&amp;edge_flat=false" alt="Hits" /></a></p>
+<p>Hashtags: #rustlang #experiment</p>
+<h3 id="experimenting"><a href="#experimenting">experimenting</a></h3>
+<p>Indexeddb is the standard database storage inside the browser. It is not Sql. It is a document database.<br />
+It is more or less a key-value storage, but the value can be a javascript object and that can be complex.<br />
+The api is in javascript, uses old fashioned callbacks and events, completely async, without async/await or Promises.<br />
+How to use it efficiently from rust? This is the question.<br />
+In this project I only experiment with indexeddb. In my next project <a href="https://github.com/bestia-dev/pwa_currency_converter">https://github.com/bestia-dev/pwa_currency_converter</a> I actually use this findings for something useful.</p>
+<h3 id="development"><a href="#development">Development</a></h3>
+<p>In Visual Studio Code press <code>ctrl+j</code> to open the Terminal window. Use <code>cargo make</code> to see the prepared steps for deployment like:<br />
+<code>$ cargo make release</code><br />
+And then follow the instructions on the screen like:</p>
+<ul>
+<li>Run the web server in a separate terminal: cd ~/rustprojects/indexeddb_from_rust/web_server_folder/;basic-http-server</li>
+<li>Run the web app in your browser: <a href="http://127.0.0.1:4000/indexeddb_from_rust/">http://127.0.0.1:4000/indexeddb_from_rust/</a></li>
+</ul>
+<p>Oh, today I did everything right, but the browser said “This site can’t be reached”. After many attempts I discovered, that WSL2 <code>localhost</code> or <code>127.0.0.1</code> connection to Win10 is broken after putting the laptop to sleep. I have to restart the WSL in PowerShell Run as administrator with<br />
+<code>Get-Service LxssManager | Restart-Service</code>.<br />
+Not nice and very difficult to discover because WSL2 is running just fine, except this.</p>
+<p>In the browser (chrome, edge, firefox) use F12 developer tools to easily see the content of indexeddb in F12. Very convenient.</p>
+<h3 id="plantuml-diagrams"><a href="#plantuml-diagrams">plantuml diagrams</a></h3>
+<p>Update 2022: I now try to use <code>mermaid</code> instead of plantuml, because it is integrated in the Github markdown.</p>
+<p>I will give a try to make diagrams for documentation with <code>plantuml</code>. Diagrams are defined using a simple and intuitive language.<br />
+It follows the philosophy “everything as code”. So it can be easily embedded in the code or documentation.<br />
+The diagram can be created online on <a href="http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80">http://www.plantuml.com/plantuml/umla/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IW80</a><br />
+Then it can be exported as svg and included as an image.</p>
+<details>
+  <summary>plantuml example</summary>
+<div class="example-wrap"><pre class="language-plantuml"><code>@startuml
+[rust code] ..&gt; [idbr]
+[idbr] ..&gt; [idbr_imports]
+[idbr_imports] ..&gt; [idb_exports]
+[idb_exports] ..&gt; [idb]
+[idb] ..&gt; [indexeddb]
+
+note right of (rust code): with async/await without jsValue
+note right of (idbr): rust library for indexeddb
+note right of (idb): javascript library with async/await\nfrom jakearchibald
+note right of (indexeddb): supported by all major browsers\nbut no support for async/await
+@enduml</code></pre></div></details>
+<h3 id="indexeddb-idb-idbr"><a href="#indexeddb-idb-idbr">indexeddb, idb, idbr</a></h3>
+<p>The original api for <code>indexeddb</code>is too hard and very old-fashioned without async/await.<br />
+I will use the <a href="https://github.com/jakearchibald/idb">idb</a> javascript library that makes <code>indexeddb</code> easier to use.
+Javascript has changed over time. Javascript is now in ES2020 edition.<br />
+I will make a typescript/javascript module to export functions from <code>idb</code>. Then one rust module to import functions from idb_export.
+The rust library <code>idbr</code> will use the imported functions and create rust objects/structs and methods/functions.<br />
+My rust code will then use only the <code>idbr</code> crate and hopefully there will be no more JsValue or other javascript peculiarities.</p>
+<p><img src="https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/idbrDiagram.svg" alt="idbrDiagram" /></p>
+<h3 id="typescript-adventure"><a href="#typescript-adventure">Typescript adventure</a></h3>
+<p>For my only module in javascript <code>idb_export</code>, I will rather use Typescript. I will write some typescript code, transpile it to javascript and invoke that from rust.<br />
+In runtime my code will use only the javascript file. Typescript is used only in development.<br />
+The Typescript compiler must be installed with <code>npm</code> that is a part of <code>nodejs</code>. I must first install <code>nodejs</code>.<br />
+On Debian the package <code>sudo apt install nodejs</code> is old version 10. The recommended version is 14, but it is from another package source.<br />
+nodesource.com is providing a script to add the new package source and install <code>nodejs</code>.<br />
+This is the commands:</p>
+<div class="example-wrap"><pre class="language-bash"><code>cd ~
+curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+nano nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install nodejs
+node -v
+npm -v
+sudo apt install build-essential</code></pre></div>
+<p>Now I can install Typescript:</p>
+<div class="example-wrap"><pre class="language-bash"><code>npm install -g typescript
+tsc --version
+tsc --help</code></pre></div>
+<p>In the terminal I just use <code>tsc</code> to transpile my source code with settings from <code>tsconfig.json</code>.<br />
+I added this to my <code>cargo make</code> for easy developing.<br />
+The typescript file is inside the <code>src</code> folder like rust source code files.<br />
+The resulting javascript file is stored in the <code>js</code> folder of the web app folder.</p>
+<h3 id="typescriptjavascript-imports"><a href="#typescriptjavascript-imports">typescript/javascript imports</a></h3>
+<p>I had major problems with <code>import</code> statements.<br />
+I tried first with <code>npm install --save idb</code>. It saves the files in a separate <code>node_modules</code> folder. That didn’t work nice with my <code>import</code> statements. I don’t know why.<br />
+At last I decided to create <code>idb</code> as a separate folder and copy the <code>node_modules/idb/build/esm</code>.<br />
+I needed to play with <code>tsconfig.json</code> to make it work.<br />
+I added the keys: baseUrl, rootDir, outDir, esModuleInterop and most important path.<br />
+From one side this import paths are just like folder structure, from the other side they are like url paths.<br />
+Confusing. But after a long experimentation I made it work. I hope I don’t need ever to change this settings.</p>
+<h3 id="code-flow"><a href="#code-flow">code flow</a></h3>
+<p>The browser opens <code>index.html</code>.<br />
+There it runs <code>import init from &quot;./pkg/indexeddb_from_rust.js&quot;;</code><br />
+and <code>init(&quot;./pkg/indexeddb_from_rust_bg.wasm&quot;);</code><br />
+This is the wasm code compiled from <code>lib.rs</code> and wasm-bindgen creates the magic to start the designated function.<br />
+The <code>idb_exports.js</code> is the result of typescript transpilation of <code>idb_exports.ts</code>, my only typescript module.
+Inside that module I need to import the <code>idb</code> module with:<br />
+<code>import * as idb from '/indexeddb_from_rust/idb/index.js';</code>
+Then Rust code <code>idbr_imports_mod.rs</code> imports the <code>idb_exports.js</code> javascript module and functions.<br />
+From here on we are now in pure (more or less) rust code.</p>
+<h3 id="missing-unsafe"><a href="#missing-unsafe">missing unsafe</a></h3>
+<p>When importing javascript functions with <code>#[wasm_bindgen]</code> and <code>extern &quot;C&quot;</code>, the rust-analyzer shows a warning about <code>missing unsafe</code>. This is not correct, the rustc compiler compile it just fine. It is because the attribute macro wasm_bindgen uses magic and makes it safe. But rust-analyzer (for now) cannot understand attribute macros.<br />
+For those looking to disable the missing-unsafe rule until it’s fixed and are using VS Code, adding the following to your settings.json and reloading your editor will suppress these errors:</p>
+<div class="example-wrap"><pre class="language-config"><code>&quot;rust-analyzer.diagnostics.disabled&quot;: [
+    &quot;missing-unsafe&quot;
+]</code></pre></div><h3 id="extern-c---importing-javascript-functions"><a href="#extern-c---importing-javascript-functions">extern “C” - importing javascript functions</a></h3>
+<p>Javascript functions are imported using the <code>extern &quot;C&quot;</code> block.<br />
+For now <code>rustfmt</code> has a bug that removes the word async, because here we have javascript functions and not C functions.<br />
+The workaround is to add <code>rustfmt::skip</code>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
+<span class="attribute">#[<span class="ident">wasm_bindgen</span>(<span class="ident">raw_module</span> <span class="op">=</span> <span class="string">&quot;/indexeddb_from_rust/js/idb_exports.js&quot;</span>)]</span>
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">fn</span> <span class="ident">check_browser_capability</span>();
+    <span class="attribute">#[<span class="ident">wasm_bindgen</span>(<span class="ident">catch</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">init_db</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
+    <span class="attribute">#[<span class="ident">wasm_bindgen</span>(<span class="ident">catch</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">add_key_value</span>(<span class="ident">store</span>: <span class="ident">String</span>, <span class="ident">key</span>: <span class="ident">String</span>, <span class="ident">value</span>: <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">JsValue</span><span class="op">&gt;</span>;
+}</code></pre></div>
+<p>For a javascript function with no return value is simple:<br />
+<code>pub(crate) fn check_browser_capability();</code><br />
+A javascript async function can return one JSValue.<br />
+<code>pub(crate) async fn get_key_value(key: String, ) -&gt; JsValue;</code><br />
+If we want to catch errors in the Promise, add attribute <code>wasm_bindgen(catch)</code>, then the functions returns <code>Result&lt;JsValue, JsValue&gt;</code>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">wasm_bindgen</span>(<span class="ident">catch</span>)]</span>
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">init_db</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">JsValue</span>, <span class="ident">JsValue</span><span class="op">&gt;</span>;</code></pre></div>
+<p>The imported async fn needs to be await just like rust functions. The macro wasm_bindgen makes some magic to transform Promises to futures on import:<br />
+<code>let currdb = open_db().await.unwrap();</code><br />
+Some of the functions are async and others are not. It can lead to strange problems if an async function is used as a normal function. This is a thing to be careful about. Rust will hopefully show a warning, but javascript will not.</p>
+<h3 id="currency-exchange-rates"><a href="#currency-exchange-rates">Currency exchange rates</a></h3>
+<p>I will get the daily exchange rate in json format from:<br />
+<a href="http://www.floatrates.com/daily/eur.json">http://www.floatrates.com/daily/eur.json</a><br />
+and fill it into indexeddb.</p>
+<h3 id="pages"><a href="#pages">pages</a></h3>
+<p>This PWA will have more pages. Pages are complete static html files inside tha pages folder. They use the same css as index.html.<br />
+It is easy to edit and preview pages because they are complete.<br />
+The rust code will fetch the html, extract only the body content and set_inner_html to div_for_wasm_html_injecting.<br />
+A page is a template, and some placeholders will be replaced with data.</p>
+<h3 id="serde-wasm-bindgen"><a href="#serde-wasm-bindgen">serde-wasm-bindgen</a></h3>
+<p>The indexeddb is key-value. Key is a string and value is any javascript object.<br />
+That is really practical for javascript, but not so for rust.<br />
+I will use <a href="https://github.com/cloudflare/serde-wasm-bindgen">serde-wasm-bindgen</a> to work directly with javascript values from rust, because indexeddb stores javascript objects.<br />
+From Rust to javascript:<br />
+<code>serde_wasm_bindgen::to_value(&amp;some_supported_rust_value)</code><br />
+From javascript to rust:<br />
+<code>let value: SomeSupportedRustType = serde_wasm_bindgen::from_value(value)?;</code></p>
+<h3 id="idbr-rust-functions"><a href="#idbr-rust-functions">idbr rust functions</a></h3><h4 id="init_upgrade_db"><a href="#init_upgrade_db">init_upgrade_db</a></h4>
+<p>First of all the db must be initialized and upgraded.<br />
+<code>idbr_mod::Database::init_upgrade_db(&quot;currdb&quot;, 2, &amp;rust_closure_for_upgrade).await;</code><br />
+When the version is greater that the existing db version, it calls the rust closure.<br />
+The closure looks like this:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">rust_closure_for_upgrade</span> <span class="op">=</span> <span class="ident">Closure::wrap</span>(<span class="ident">Box::new</span>(
+        <span class="kw">move</span> <span class="op">|</span><span class="ident">db</span>: <span class="ident">JsValue</span>, <span class="ident">old_version</span>: <span class="ident">JsValue</span>, <span class="ident">new_version</span>: <span class="ident">JsValue</span>, <span class="ident">transaction</span>: <span class="ident">JsValue</span><span class="op">|</span> {
+            <span class="ident">upgrade_currdb</span>(<span class="ident">db</span>, <span class="ident">old_version</span>, <span class="ident">new_version</span>, <span class="ident">transaction</span>);
+        },
+    )</code></pre></div>
+<p>We create a new store with: <code>db.create_object_store(&quot;Currency&quot;);</code>.<br />
+To add/modify data in the store we must the given use the <code>Transaction</code> in mode <code>versionchange</code>.<br />
+First we define the object store and then put the data:<br />
+<code>let cfg = tx.get_object_store(&quot;Config&quot;);</code><br />
+<code>cfg.put(&quot;base_currency&quot;, &quot;EUR&quot;);</code></p>
+<h4 id="modify-one-data-with-implicit-transaction"><a href="#modify-one-data-with-implicit-transaction">modify one data with implicit transaction</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">db</span> <span class="op">=</span> <span class="ident">idb::Database::use_db</span>(<span class="string">&quot;currdb&quot;</span>).<span class="kw">await</span>;
+<span class="ident">db</span>.<span class="ident">put_key_value</span>(<span class="string">&quot;store&quot;</span>, <span class="string">&quot;key&quot;</span>, <span class="string">&quot;value&quot;</span>).<span class="kw">await</span>.<span class="ident">unwrap</span>();</code></pre></div>
+<h4 id="modify-many-data-in-one-transaction"><a href="#modify-many-data-in-one-transaction">modify many data in one transaction</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">db</span> <span class="op">=</span> <span class="ident">idb::Database::use_db</span>(<span class="string">&quot;currdb&quot;</span>).<span class="kw">await</span>;
+<span class="kw">let</span> <span class="ident">tx</span> <span class="op">=</span> <span class="ident">db</span>.<span class="ident">transaction</span>();
+<span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">get_object_store_readwrite</span>(<span class="string">&quot;Currency&quot;</span>);
+<span class="ident">store</span>.<span class="ident">put</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;a&quot;</span>);
+<span class="ident">store</span>.<span class="ident">put</span>(<span class="string">&quot;b&quot;</span>, <span class="string">&quot;b&quot;</span>);
+<span class="ident">store</span>.<span class="ident">put</span>(<span class="string">&quot;c&quot;</span>, <span class="string">&quot;c&quot;</span>);
+<span class="ident">tx</span>.<span class="ident">close</span>();</code></pre></div>
+</div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="currdb_config_mod/index.html" title="indexeddb_from_rust::currdb_config_mod mod">currdb_config_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="currdb_currency_mod/index.html" title="indexeddb_from_rust::currdb_currency_mod mod">currdb_currency_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="currdb_mod/index.html" title="indexeddb_from_rust::currdb_mod mod">currdb_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="idbr_imports_mod/index.html" title="indexeddb_from_rust::idbr_imports_mod mod">idbr_imports_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="idbr_mod/index.html" title="indexeddb_from_rust::idbr_mod mod">idbr_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="page_input_currency_mod/index.html" title="indexeddb_from_rust::page_input_currency_mod mod">page_input_currency_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="page_main_mod/index.html" title="indexeddb_from_rust::page_main_mod mod">page_main_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="page_modal_about_mod/index.html" title="indexeddb_from_rust::page_modal_about_mod mod">page_modal_about_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="page_output_currency_mod/index.html" title="indexeddb_from_rust::page_output_currency_mod mod">page_output_currency_mod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="utils_mod/index.html" title="indexeddb_from_rust::utils_mod mod">utils_mod</a></div><div class="item-right docblock-short"><p>utils_mod.rs</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="web_sys_mod/index.html" title="indexeddb_from_rust::web_sys_mod mod">web_sys_mod</a></div><div class="item-right docblock-short"><p>helper functions for web_sys, window, document, dom, console,
+local_storage, session_storage,…</p>
+</div></div></div><h2 id="macros" class="small-section-header"><a href="#macros">Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.on_click.html" title="indexeddb_from_rust::on_click macro">on_click</a></div><div class="item-right docblock-short"><p>Simple macro to set listener of on_click events to an element_id.<br />
+fn with 1 arg(element_id): on_click!(element_id, function_ident)</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.row_on_click.html" title="indexeddb_from_rust::row_on_click macro">row_on_click</a></div><div class="item-right docblock-short"><p>list contains rows, every row item needs a separate event handler
+the element Id is concatenation of element_prefix plus the row_number</p>
+</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.__wasm_bindgen_generated_wasm_bindgen_start.html" title="indexeddb_from_rust::__wasm_bindgen_generated_wasm_bindgen_start fn">__wasm_bindgen_generated_wasm_bindgen_start</a></div><div class="item-right docblock-short"><p>To start the Wasm application, wasm_bindgen runs this functions</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.wasm_bindgen_start.html" title="indexeddb_from_rust::wasm_bindgen_start fn">wasm_bindgen_start</a></div><div class="item-right docblock-short"><p>To start the Wasm application, wasm_bindgen runs this functions</p>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="indexeddb_from_rust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0 (7737e0b5c 2022-04-04)" ></div>
+</body></html>

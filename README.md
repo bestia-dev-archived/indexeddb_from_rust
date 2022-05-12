@@ -1,24 +1,24 @@
-[comment]: # (lmake_md_to_doc_comments segment start A)
+[comment]: # (auto_md_to_doc_comments segment start A)
 
 # indexeddb_from_rust
 
-[comment]: # (lmake_cargo_toml_to_md start)
+[comment]: # (auto_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
-***version: 2021.418.1035  date: 2021-04-18 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/indexeddb_from_rust)***  
+***version: 2022.512.814 date: 2022-05-12 author: [bestia.dev](https://bestia.dev) repository: [Github](https://github.com/bestia-dev/indexeddb_from_rust)***  
 
-[comment]: # (lmake_cargo_toml_to_md end)
+[comment]: # (auto_cargo_toml_to_md end)
 
-[comment]: # (lmake_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1065-green.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-75-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-151-purple.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[comment]: # (auto_lines_of_code start)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1067-green.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-318-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-153-purple.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 
-[comment]: # (lmake_lines_of_code end)
+[comment]: # (auto_lines_of_code end)
 
-[![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/blob/master/LICENSE)
 [![Rust](https://github.com/bestia-dev/indexeddb_from_rust/workflows/RustAction/badge.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fbestia-dev%2Findexeddb_from_rust&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
@@ -250,3 +250,4 @@ store.put("c", "c");
 tx.close();
 ```
 
+[comment]: # (auto_md_to_doc_comments segment end A)

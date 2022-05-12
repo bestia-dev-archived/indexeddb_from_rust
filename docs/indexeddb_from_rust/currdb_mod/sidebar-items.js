@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Databases",""],["ObjectStores",""]],"fn":[["init_upgrade_currdb","init_upgrade_currdb will create the database and call upgrade_currdb()"],["upgrade_currdb","pass this function to javascript as closure"],["upgrade_from_v00_to_v01",""],["upgrade_from_v01_to_v02",""]]});

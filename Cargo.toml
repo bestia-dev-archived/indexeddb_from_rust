@@ -1,6 +1,6 @@
 [package]
 name = "indexeddb_from_rust"
-version = "2021.418.1035"
+version = "2022.512.814"
 authors = ["bestia.dev"]
 homepage = "https://bestia.dev"
 edition = "2018"

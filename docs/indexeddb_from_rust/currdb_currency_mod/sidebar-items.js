@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["fill_currency_store",""],["from_jsvalue",""],["get_rate",""],["put_inside_database",""],["put_inside_object_store","put in ObjectStore"],["put_inside_transaction","put inside transaction"],["to_jsvalue",""]],"struct":[["ValueStruct","fields in the value column of key-value currency"]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["check_browser_capability",""],["get_key_value",""],["put_key_value",""]],"struct":[["Cursor",""],["Database",""],["ObjectStoreInsideTransaction",""],["Transaction",""]]});

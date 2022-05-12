@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["modal_about_close_on_click","close the modal page"],["page_modal_about","fetch and inject HTML in index.html/div_for_modal then open as modal"]]});

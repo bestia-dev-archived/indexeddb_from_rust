@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["indexeddb_from_rust"];

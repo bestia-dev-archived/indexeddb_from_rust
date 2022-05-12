@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["indexeddb_from_rust"] = [{"text":"impl <a class=\"trait\" href=\"https://docs.rs/serde/1.0.123/serde/ser/trait.Serialize.html\" title=\"trait serde::ser::Serialize\">Serialize</a> for <a class=\"struct\" href=\"indexeddb_from_rust/currdb_currency_mod/struct.ValueStruct.html\" title=\"struct indexeddb_from_rust::currdb_currency_mod::ValueStruct\">ValueStruct</a>","synthetic":false,"types":["indexeddb_from_rust::currdb_currency_mod::ValueStruct"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
