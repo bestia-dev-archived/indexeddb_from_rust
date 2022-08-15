@@ -20,7 +20,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/blob/master/LICENSE)
 [![Rust](https://github.com/bestia-dev/indexeddb_from_rust/workflows/RustAction/badge.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
-![Hits](https://bestia.dev/webpage_hit_counter/get_svg_image/43425691)
+![Hits](https://bestia.dev/webpage_hit_counter/get_svg_image/43425691.svg)
 
 Hashtags: #rustlang #experiment  
 My projects on Github are more like a tutorial than a finished product: [bestia-dev tutorials](https://github.com/bestia-dev/tutorials_rust_wasm).
