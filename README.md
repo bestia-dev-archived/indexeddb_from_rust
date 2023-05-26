@@ -1,22 +1,22 @@
-[comment]: # (auto_md_to_doc_comments segment start A)
+[//]: # (auto_md_to_doc_comments segment start A)
 
 # indexeddb_from_rust
 
-[comment]: # (auto_cargo_toml_to_md start)
+[//]: # (auto_cargo_toml_to_md start)
 
 **experimenting with indexeddb in rust wasm PWA**  
 ***version: 2022.512.814 date: 2022-05-12 author: [bestia.dev](https://bestia.dev) repository: [Github](https://github.com/bestia-dev/indexeddb_from_rust)***  
 
-[comment]: # (auto_cargo_toml_to_md end)
+[//]: # (auto_cargo_toml_to_md end)
 
-[comment]: # (auto_lines_of_code start)
+[//]: # (auto_lines_of_code start)
 [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1067-green.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-318-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-153-purple.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 
-[comment]: # (auto_lines_of_code end)
+[//]: # (auto_lines_of_code end)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/blob/master/LICENSE)
 [![Rust](https://github.com/bestia-dev/indexeddb_from_rust/workflows/RustAction/badge.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
@@ -67,7 +67,7 @@ I will make a typescript/javascript module to export functions from `idb`. Then 
 The rust library `idbr` will use the imported functions and create rust objects/structs and methods/functions.  
 My rust code will then use only the `idbr` crate and hopefully there will be no more JsValue or other javascript peculiarities.
 
-[comment]: # (auto_plantuml start)
+[//]: # (auto_plantuml start)
 
 ```plantuml
 @startuml
@@ -86,7 +86,7 @@ note right of (indexeddb): supported by all major browsers\nbut no support for a
 
 ![svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q](https://github.com/bestia-dev/indexeddb_from_rust/raw/main/images/svg_YdyxlCJ7feG0pg_JDSeImB-y0msDFvya54qYMUrJO_Q.svg)
 
-[comment]: # (auto_plantuml end)
+[//]: # (auto_plantuml end)
 
 ## Typescript adventure
 
@@ -266,4 +266,4 @@ So I can drink a free beer for your health :-)
 [//bestiadev.substack.com](https://bestiadev.substack.com)  
 [//youtube.com/@bestia-dev-tutorials](https://youtube.com/@bestia-dev-tutorials)  
 
-[comment]: # (auto_md_to_doc_comments segment end A)
+[//]: # (auto_md_to_doc_comments segment end A)

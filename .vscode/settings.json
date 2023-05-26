@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
+        "Alla",
         "bestia",
+        "bestiadev",
         "bindgen",
         "currdb",
         "deps",
@@ -15,9 +17,11 @@
         "indexeddb",
         "jakearchibald",
         "Lxss",
+        "Nazdravlje",
         "nodesource",
         "osit",
         "plantuml",
+        "Prost",
         "readwrite",
         "rustc",
         "rustfmt",
@@ -26,6 +30,8 @@
         "serde",
         "startuml",
         "structs",
-        "transpilation"
+        "substack",
+        "transpilation",
+        "zdravje"
     ]
 }
