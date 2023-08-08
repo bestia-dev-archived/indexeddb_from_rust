@@ -9,6 +9,10 @@
 
 [//]: # (auto_cargo_toml_to_md end)
 
+![status](https://img.shields.io/badge/obsolete-red) 
+![status](https://img.shields.io/badge/archived-red) 
+![status](https://img.shields.io/badge/tutorial-yellow) 
+
 [//]: # (auto_lines_of_code start)
 [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1067-green.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
 [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-318-blue.svg)](https://github.com/bestia-dev/indexeddb_from_rust/)
